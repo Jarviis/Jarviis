@@ -1,0 +1,42 @@
+<div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+              <div class="container">
+                <a href="/" class="nav-logo">
+                  <%= image_tag "logo.png" %>
+                </a href="/">
+                <div id="nav-collapse-01" class="nav-collapse collapse">
+                  <ul class="nav">
+                    <li>
+                      <a href="#fakelink">
+                        issues
+                      </a>
+                    </li>
+                    <li class="active">
+                      <a href="#fakelink">
+                        rooms
+                      </a>
+                    </li>
+                    <li class="account-menu">
+                      <a href="#">
+                        <%= image_tag gravatar_url(current_user.email, secure: true, size: 36), :alt => 'avatar' %>
+                          <%= current_user.full_name %>
+                        <i class="icon-reorder"></i>
+                      </a>
+                      <ul>
+                        <li><a href="#fakelink">Profile</a></li>
+                        <li><a href="/users/settings">Account Settings</a></li>
+                        <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div><!--/.nav -->
+              </div>
+            </div>
+          </div>
+<div id="app" style="display: none;"><div class="spinner"></div></div>
+<div id="settings"><div class="spinner"></div></div>
+<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+<script type="text/javascript">
+  Jarviis.Settings.user_id = <%= current_user.id %>
+  Jarviis.Settings.user = <%= current_user.to_json.html_safe %>;
+</script>
