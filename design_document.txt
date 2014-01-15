@@ -1,0 +1,12 @@
+1. Issues (POST/GET/DELETE)
+  * state
+  * name
+  * timestamp
+  etc.
+
+2. Users details
+
+3. Sprints (has_many issues)
+
+4. Comments (katw apo ta issues)
+
