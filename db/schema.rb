@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115192223) do
+ActiveRecord::Schema.define(version: 20140115215923) do
+
+  create_table "issues", force: true do |t|
+    t.integer  "state"
+    t.string   "name"
+    t.string   "description"
+    t.integer  "assignee_id"
+    t.integer  "reporter_id"
+    t.datetime "due_date"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "issues", ["assignee_id"], name: "index_issues_on_assignee_id"
+  add_index "issues", ["parent_id"], name: "index_issues_on_parent_id"
+  add_index "issues", ["reporter_id"], name: "index_issues_on_reporter_id"
 
   create_table "users", force: true do |t|
     t.string   "name"
