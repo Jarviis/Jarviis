@@ -10,6 +10,8 @@ GEM
       erubis (~> 2.7.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
+    active_model_serializers (0.8.1)
+      activemodel (>= 3.0)
     activemodel (4.0.0)
       activesupport (= 4.0.0)
       builder (~> 3.1.0)
@@ -93,9 +95,6 @@ GEM
       spork (>= 0.8.4)
     hike (1.2.3)
     i18n (0.6.9)
-    jbuilder (1.5.3)
-      activesupport (>= 3.0.0)
-      multi_json (>= 1.2.0)
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -238,6 +237,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers
   capistrano
   capybara (~> 2.0.0)
   database_cleaner (~> 0.8.0)
@@ -248,7 +248,6 @@ DEPENDENCIES
   font-awesome-rails
   guard-rspec (~> 2.2.1)
   guard-spork (~> 1.4.2)
-  jbuilder (~> 1.2)
   jquery-rails
   pg
   pry-debugger
