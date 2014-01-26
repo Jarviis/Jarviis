@@ -21,6 +21,9 @@ $darker-blue: #2c3e50;
       min-width: 120px;
       text-align:center;
     }
+    li.action {
+      border: 0; min-width: 0;
+    }
     ul {
       left: 0;
       li {

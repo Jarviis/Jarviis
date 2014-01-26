@@ -7,20 +7,23 @@
 </head>
 <body>
 <div class="navbar navbar-inverse">
-  <div class="navbar-inner">
+  <div id="navbar" class="navbar-inner">
     <div class="container">
       <a href="/" class="nav-logo">
         <%= image_tag "logo.png" %>
       </a href="/">
-      <div id="nav-collapse-01" class="nav-collapse collapse">
+      <div id="navigation" class="nav-collapse collapse">
         <ul class="nav">
+          <li class="action">
+            <a href="#" class="add-issue"><i class="fa fa-plus"></i></a>
+          </li>
           <li>
             <a href="#fakelink">
               issues
             </a>
           </li>
           <li class="account-menu">
-            <a href="#">
+            <a href="#" id="add-issue">
               <%= image_tag gravatar_url(current_user.email, secure: true, size: 36), :alt => 'avatar' %>
                 <%= current_user.name %>
               <i class="icon-reorder"></i>

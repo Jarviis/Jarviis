@@ -1,16 +1,14 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
-//
-
-
 Jarviis.addRegions({
-  main: "#main"
+  navbar: '#navbar',
+  issues: "#issues",
+  modal: Jarviis.Regions.Modal
 });
 
 Jarviis.addInitializer(function() {
-  Jarviis.issues = new Jarviis.Collections.Issues();
+  Jarviis.b.issues = new Jarviis.Collections.Issues();
 
-  Jarviis.main.show(new Jarviis.Views.IssuesView({collection: Jarviis.issues, el: '#issues'}));
+  Jarviis.navbar.attachView(new Jarviis.Views.NavView({el: $("#navigation")}));
+  Jarviis.issues.show(new Jarviis.Views.IssuesView({collection: Jarviis.b.issues}));
 });
 
 $(document).ready(function() {
