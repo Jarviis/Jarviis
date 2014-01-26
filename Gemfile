@@ -8,6 +8,12 @@ ruby '2.1.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
+# User Flat UI components
+gem 'flatui-rails'
+
+# Use Font Awesome icon fonts
+gem "font-awesome-rails"
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 

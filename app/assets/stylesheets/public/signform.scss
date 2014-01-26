@@ -1,0 +1,20 @@
+section#sign-form {
+  margin: 100px auto;
+  width: 300px;
+  text-align: center;
+  input {
+    width: 100%;
+  }
+  .btn-success {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    padding: 15px 0 15px 14px;
+  }
+  #user_remember_me {
+    display:inline; width:auto;
+  }
+  #user_remember_me+label {
+    display: inline;
+  }
+}
