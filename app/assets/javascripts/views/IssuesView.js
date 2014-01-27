@@ -10,3 +10,4 @@ Jarviis.Views.IssuesView = Backbone.Marionette.CollectionView.extend({
   itemView: Jarviis.Views.ListIssue,
   emptyView: Jarviis.Views.NoIssueView
 });
+

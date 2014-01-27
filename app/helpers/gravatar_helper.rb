@@ -20,3 +20,4 @@ module GravatarHelper
     base_url + path
   end
 end
+
