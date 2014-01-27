@@ -33,9 +33,6 @@ gem 'backbone-on-rails'
 # Officially-supported gem for Backbone Marionette
 gem 'marionette-rails'
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
-
 group :doc do
   gem 'yard', require: false
 end
