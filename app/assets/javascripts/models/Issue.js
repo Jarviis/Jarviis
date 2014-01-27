@@ -1,1 +1,3 @@
-Jarviis.Models.Issue = Backbone.Model.extend({});
+Jarviis.Models.Issue = Backbone.Model.extend({
+  url: 'api/'+apiVer+'/issues'
+});

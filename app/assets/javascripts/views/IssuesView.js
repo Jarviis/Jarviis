@@ -1,6 +1,6 @@
 Jarviis.Views.ListIssue = Backbone.Marionette.ItemView.extend({
   tagName: 'li',
-  template: _.template("<a href='#'><%=title%></a>")
+  template: _.template("<a href='#'><%-name%></a>")
 });
 Jarviis.Views.NoIssueView = Backbone.Marionette.ItemView.extend({
   template: _.template('<p>Hooray! You have no open issues!</p>')
