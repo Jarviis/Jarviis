@@ -1,0 +1,30 @@
+<div id="main">
+  <h2>Issues</h2>
+  <ul id="issues">
+    
+  </ul>
+</div>
+
+<div id="modal"></div>
+
+<script id="add-issue-modal" type="text/html">
+<div class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Create new issue</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text" name="name" id="name" placeholder="Issue title" />
+        <input type="text" name="assignee" id="assignee" placeholder="Assignee" />
+        <input type="text" name="due-date" id="due-date" placeholder="eg. 1 Apr 14" />
+        <textarea name="description" placeholder="Write some details..." id= rows="8" cols="40"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</script>

@@ -28,6 +28,11 @@ gem 'jquery-rails'
 
 gem 'active_model_serializers'
 
+gem 'backbone-on-rails'
+
+# Officially-supported gem for Backbone Marionette
+gem 'marionette-rails'
+
 group :doc do
   gem 'yard', require: false
 end

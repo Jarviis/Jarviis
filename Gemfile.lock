@@ -238,6 +238,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  backbone-on-rails
   capistrano
   capybara (~> 2.0.0)
   database_cleaner (~> 0.8.0)
