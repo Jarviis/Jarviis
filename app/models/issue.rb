@@ -1,4 +1,7 @@
 class Issue < ActiveRecord::Base
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
+
   OPEN = 0
   RESOLVED = 1
   CLOSED = 2
@@ -11,6 +14,20 @@ class Issue < ActiveRecord::Base
     WONTFIX => "wontfix"
   }
 
+  mapping do
+    indexes :id, type: "integer"
+    indexes :assignee_id, type: "integer"
+    indexes :assignee_name, boost: 10
+    indexes :reporter_id, type: "integer"
+    indexes :reporter_name, boost: 10
+    indexes :name
+    indexes :state, type: "integer"
+    indexes :description
+    indexes :created_at, type: "date"
+    indexes :updated_at, type: "date"
+    indexes :due_date, type: "date"
+  end
+
   belongs_to :reporter, class_name: "User", foreign_key: "reporter_id"
   belongs_to :assignee, class_name: "User", foreign_key: "assignee_id"
 
@@ -21,6 +38,21 @@ class Issue < ActiveRecord::Base
   def state_to_s
     HUMANIZED_STATE[self.state]
   end
+
+  # Search criteria
+  def self.search(params)
+    tire.search do |es|
+      es.query { string params[:query], default_operator: "AND" } if params[:query].present?
+      es.filter :term, assignee_id: params[:assignee_id] if params[:assignee_id]
+      es.filter :term, reporter_id: params[:reporter_id] if params[:reporter_id]
+      es.sort { by :created_at, "desc" } if params[:query].blank?
+    end
+  end
+
+  def to_indexed_json
+    to_json(methods: [:assignee_name, :reporter_name])
+  end
+
   # @return [String] The name of the assignee, Nobody if there no assignee
   def assignee_name
     assignee.present? ? assignee.name : "Nobody"
