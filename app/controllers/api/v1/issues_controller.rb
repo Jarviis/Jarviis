@@ -1,7 +1,7 @@
 class Api::V1::IssuesController < Api::V1::ApiController
   before_action :set_issue, only: [:show, :edit, :update, :destroy]
   def index
-    @issues = Issue.all.includes([:assignee, :reporter])
+    @issues = Issue.search(params)
 
     render json: @issues
   end

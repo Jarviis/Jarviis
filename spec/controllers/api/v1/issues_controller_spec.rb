@@ -5,13 +5,13 @@ describe Api::V1::IssuesController do
   let(:json_response) { JSON.parse(response.body) }
 
   describe "#index" do
-
-    let!(:issues) { FactoryGirl.create_list(:issue, 2) }
+    let(:reporter) { FactoryGirl.create(:user) }
+    let!(:issues) { FactoryGirl.create_list(:issue, 2, reporter_id: reporter.id) }
 
     it "returns all issues" do
       get :index
 
-      expect(response.body).to eq(Issue.all.map { |i| IssueSerializer.new(i) }.to_json)
+      expect(response.body).to eq(Issue.search({}).to_json)
     end
   end
 
@@ -76,7 +76,8 @@ describe Api::V1::IssuesController do
   end
 
   describe "PUT update" do
-    let!(:issue) { FactoryGirl.create(:issue, name: "OLD") }
+    let(:reporter) { FactoryGirl.create(:user) }
+    let!(:issue) { FactoryGirl.create(:issue, name: "OLD", reporter_id: reporter.id) }
 
     context "with valid changes" do
       let(:params) do
@@ -92,7 +93,8 @@ describe Api::V1::IssuesController do
   end
 
   describe "DELETE destroy" do
-    let!(:issue) { FactoryGirl.create(:issue) }
+    let(:reporter) { FactoryGirl.create(:user) }
+    let!(:issue) { FactoryGirl.create(:issue, name: "OLD", reporter_id: reporter.id) }
 
     it "destroys the issue" do
       expect {
