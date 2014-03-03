@@ -36,6 +36,9 @@ gem 'backbone-on-rails'
 # Officially-supported gem for Backbone Marionette
 gem 'marionette-rails'
 
+# Form serializer for Backbone
+gem 'backbone-syphon-rails'
+
 group :doc do
   gem 'yard', require: false
 end

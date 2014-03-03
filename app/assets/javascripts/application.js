@@ -15,6 +15,7 @@
 //= require underscore
 //= require backbone
 //= require backbone.marionette
+//= require backbone-syphon
 //= require namespace
 //= require_tree ./models
 //= require_tree ./collections

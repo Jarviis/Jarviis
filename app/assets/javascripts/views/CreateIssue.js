@@ -7,18 +7,16 @@ Jarviis.Views.CreateIssue = Backbone.Marionette.ItemView.extend({
   ui: {
     name: '#name',
     assignee: '#assignee',
+    reporter: '#reporter',
     due_date: '#due-date',
     description: '#description'
   },
   create: function (ev) {
     ev.preventDefault();
-    var newIssue = new Jarviis.Models.Issue({
-      name: this.ui.name.val(),
-      assignee: this.ui.assignee.val(),
-      due_date: this.ui.due_date.val(),
-      description: this.ui.description.val()
-    });
-    newIssue.save({wait:true});
+    var data = Backbone.Syphon.serialize(this);
+    console.log(data);
+    var newIssue = new Jarviis.Models.Issue(data);
+    newIssue.save();
     Jarviis.b.issues.push(newIssue)
     Jarviis.modal.close();
   },

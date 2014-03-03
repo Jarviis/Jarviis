@@ -16,10 +16,13 @@
         <h4 class="modal-title">Create new issue</h4>
       </div>
       <div class="modal-body">
+      <form>
         <input type="text" name="name" id="name" placeholder="Issue title" />
-        <input type="text" name="assignee" id="assignee" placeholder="Assignee" />
-        <input type="text" name="due-date" id="due-date" placeholder="eg. 1 Apr 14" />
+        <input type="text" name="assignee_id" id="assignee" placeholder="Assignee" />
+        <input type="text" name="reporter_id" id="reporter" placeholder="Reporter" />
+        <input type="text" name="due_date" id="due-date" placeholder="eg. 1 Apr 14" />
         <textarea name="description" placeholder="Write some details..." id= rows="8" cols="40"></textarea>
+      </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary">Save</button>
