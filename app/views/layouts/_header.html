@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Jarviis</title>
-  <%= stylesheet_link_tag    "application", media: "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
 <div class="navbar navbar-inverse">
   <div id="navbar" class="navbar-inner">
     <div class="container">
       <a href="/" class="nav-logo">
         <%= image_tag "logo.png" %>
-      </a href="/">
+      </a>
+      <% if user_signed_in? %>
       <div id="navigation" class="nav-collapse collapse">
         <ul class="nav">
           <li class="action">
@@ -31,17 +23,14 @@
             </a>
             <ul>
               <li><a href="#fakelink">Profile</a></li>
-              <li><a href="/users/settings">Account Settings</a></li>
+              <li><a href="/users/edit">Account Settings</a></li>
               <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
             </ul>
           </li>
         </ul>
+        <% end %>
       </div><!--/.nav -->
     </div>
   </div>
 </div>
-<%= yield %>
 
-<%= javascript_include_tag "application" %>
-</body>
-</html>
