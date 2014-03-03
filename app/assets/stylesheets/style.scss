@@ -112,3 +112,14 @@ $darker-blue: #2c3e50;
     top: 35px;
     width: 0;
 }
+
+.modal {
+  position: fixed;
+  bottom: 0;
+  right: 5px;
+  top: auto;
+  left: auto;
+  margin: 0;
+  border-radius: 0;
+  width: 460px;
+}
