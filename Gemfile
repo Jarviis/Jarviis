@@ -8,8 +8,7 @@ ruby '2.1.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
-# User Flat UI components
-gem 'flatui-rails'
+gem 'bootstrap-sass', '~> 3.1.1'
 
 # Use Font Awesome icon fonts
 gem "font-awesome-rails"

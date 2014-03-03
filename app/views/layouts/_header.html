@@ -1,36 +1,46 @@
-<div class="navbar navbar-inverse">
-  <div id="navbar" class="navbar-inner">
-    <div class="container">
-      <a href="/" class="nav-logo">
+<nav class="navbar navbar-default" id="navbar" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">
         <%= image_tag "logo.png" %>
       </a>
-      <% if user_signed_in? %>
-      <div id="navigation" class="nav-collapse collapse">
-        <ul class="nav">
-          <li class="action">
-            <a href="#" class="add-issue"><i class="fa fa-plus"></i></a>
-          </li>
-          <li>
-            <a href="#fakelink">
-              issues
-            </a>
-          </li>
-          <li class="account-menu">
-            <a href="#" id="add-issue">
-              <%= image_tag gravatar_url(current_user.email, secure: true, size: 36), :alt => 'avatar' %>
-                <%= current_user.name %>
-              <i class="icon-reorder"></i>
-            </a>
-            <ul>
-              <li><a href="#fakelink">Profile</a></li>
-              <li><a href="/users/edit">Account Settings</a></li>
-              <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
-            </ul>
-          </li>
-        </ul>
-        <% end %>
-      </div><!--/.nav -->
     </div>
-  </div>
-</div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+        <li>
+          <a href="#" class="add-issue"><i class="fa fa-plus"></i>New issue</a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <%= image_tag gravatar_url(current_user.email, secure: true, size: 36), alt: "avatar", class: "avatar" %>
+            <%= current_user.name %>
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to edit_user_registration_path do %>
+              <span class="glyphicon glyphicon-cog"></span> Account
+            <% end %></li>
+            <li class="divider"></li>
+            <li><%= link_to destroy_user_session_path, method: :delete do %>
+              <span class="glyphicon glyphicon-log-out"></span> Logout
+            <% end %></li>
+          </ul>
+        </li>
+        <% else %>
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "About", about_path %></li>
+        <li><%= link_to "Sign In", new_user_session_path %></li>
+        <li><%= link_to "Join Now", new_user_registration_path, class: 'btn btn-success' %></li>
+        <% end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 

@@ -1,63 +1,44 @@
+$navbar-default-bg: #2c3e50;
+$border-radius-base: 0;
+$navbar-default-brand-color: #ecf0f1;
+$navbar-default-link-color: #ecf0f1;
+$navbar-default-link-hover-color: #bdc3c7;
+$navbar-default-link-active-color: #bdc3c7;
+$navbar-default-link-active-bg: #2c3e50;
+$brand-primary: #e74c3c;
+$jumbotron-bg: transparent;
+$navbar-padding-vertical: 10px;
+$btn-success-bg: #27ae60;
+$btn-default-bg: rgba(236, 240, 241,0.8);
+
+@import 'bootstrap';
+
 $petrol: #526476;
 $dark-blue: #34495E;
 $darker-blue: #2c3e50;
+
+.navbar {
+  border: 0;
+  .navbar-brand {
+    margin-left: -2px !important;
+    background: #34495e;
+  }
+  li {
+    margin-top: 2px;
+  }
+  .avatar {
+    margin-right: 10px;
+    height: 24px;
+  }
+  .fa {
+    margin-right: 10px;
+  }
+}
+
 #settings, #app {
   margin: 20px 30px;
   h2 {
     margin: 20px 0;
-  }
-}
-.navbar {
-  .navbar-inner {
-    border-radius: 0;
-  }
-  .nav > li > ul:before {
-    left: 143px;
-  }
-  .nav{
-    margin: 0 !important;
-    li {
-      border-left: 2px solid $darker-blue;
-      min-width: 120px;
-      text-align:center;
-    }
-    li.action {
-      border: 0; min-width: 0;
-    }
-    ul {
-      left: 0;
-      li {
-        text-align: left;
-      }
-    }
-  }
-  .nav-logo {
-    background: $darker-blue;
-    display: inline-block;
-    height: 54px;
-    margin-left: 10px;
-    vertical-align: top;
-    img {
-      padding: 17px 30px
-    }
-  }
-  .account-menu {
-    a {
-      padding: 8px 8px 7px 8px !important;
-      img {
-        margin-right: 8px;
-      }
-    }
-    .icon-reorder {
-      color: $petrol;
-      font-size: 20px;
-      margin: 0px 6px 0px 16px;
-    }
-  }
-  .nav-collapse {
-    display: inline-block;
-    position: absolute;
-    right: 0;
   }
 }
 .sign-in-form, .reset-password-form {
@@ -74,20 +55,6 @@ $darker-blue: #2c3e50;
       display: block;
     }
   }
-}
-
-
-.navbar-inverse .nav > li > a {
-  border-bottom: 3px solid $dark-blue;
-  color: #FFFFFF;
-}
-.navbar-inverse .nav > li.active > a, .navbar-inverse .nav > li.active > a:hover, .navbar-inverse .nav > li.active > a:focus {
-  background-color: #1ABC9C;
-  border-bottom-color: #16A085;
-  border-left: medium none;
-  box-shadow: none;
-  color: #FFFFFF;
-  padding-left: 22px;
 }
 
 .login-screen {
