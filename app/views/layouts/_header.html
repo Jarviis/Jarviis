@@ -33,6 +33,9 @@
             <% end %></li>
           </ul>
         </li>
+        <% else %>
+        <li><%= link_to "Sign In", new_user_session_path %></li>
+        <li><%= link_to "Join Now", new_user_registration_path, class: 'btn btn-success' %></li>
         <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->

@@ -17,6 +17,9 @@ $petrol: #526476;
 $dark-blue: #34495E;
 $darker-blue: #2c3e50;
 
+.center {
+  text-align: center;
+}
 .navbar {
   border: 0;
   .navbar-brand {
@@ -80,13 +83,31 @@ $darker-blue: #2c3e50;
     width: 0;
 }
 
-.modal {
+.modal-dialog {
+  .modal-content {
+    border-bottom: 0;
+    border-radius: 0;
+  }
+  .modal-minimized {
+    display: none;
+    background: none repeat scroll 0 0 #494949;
+    color: #F7F7F7;
+    float: right;
+    padding: 7px 13px;
+    width: 230px;
+    #maximize {
+      opacity: 1;
+      color: #F7F7F7;
+    }
+  }
+  #minimize {
+    float: right;
+  }
   position: fixed;
   bottom: 0;
   right: 5px;
   top: auto;
   left: auto;
   margin: 0;
-  border-radius: 0;
   width: 460px;
 }
