@@ -103,6 +103,9 @@ $darker-blue: #2c3e50;
   #minimize {
     float: right;
   }
+  .close {
+    margin-left: 10px;
+  }
   position: fixed;
   bottom: 0;
   right: 5px;
