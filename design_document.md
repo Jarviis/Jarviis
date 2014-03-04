@@ -9,7 +9,7 @@
   * parent_id (if truthy then subtask else normal)
   * watchers (future work)
 
-2. Users details
+~~2. Users details~~
 
 3. Sprints (has_many issues)
   * title
@@ -20,7 +20,16 @@
 
 5. My assigned issues & my reported issues (GET)
 
-6. Create issue (POST)
+6. Create issue (POST) - almost there
+  * state (open, resolved, closed, wontfix)
+  * ~~name~~
+  * ~~description~~
+  * ~~assignee (user*)~~
+  * ~~reporter (user*)~~
+  * timestamp
+  * ~~due date~~
+  * parent_id (if truthy then subtask else normal)
+  * watchers (future work)
 
 7. Update issue (POST)
 
