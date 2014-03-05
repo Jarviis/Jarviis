@@ -1,7 +1,6 @@
 Jarviis.addRegions({
   navbar: '#nav',
-  assigned: "#assigned",
-  reported: "#reported",
+  main: '#main',
   modal: Jarviis.Regions.Modal
 });
 
@@ -13,8 +12,12 @@ Jarviis.addInitializer(function() {
   Jarviis.b.reported_issues.fetch();
 
   Jarviis.navbar.attachView(new Jarviis.Views.NavView({el: $(".navbar")}));
-  Jarviis.assigned.show(new Jarviis.Views.IssuesView({collection: Jarviis.b.assigned_issues}));
-  Jarviis.reported.show(new Jarviis.Views.IssuesView({collection: Jarviis.b.reported_issues}));
+
+  var dashboard = new Jarviis.Layouts.DashboardLayout();
+  Jarviis.main.show(dashboard);
+
+  dashboard.assigned.show(new Jarviis.Views.IssuesView({collection: Jarviis.b.assigned_issues}));
+  dashboard.reported.show(new Jarviis.Views.IssuesView({collection: Jarviis.b.reported_issues}));
 });
 
 $(document).ready(function() {

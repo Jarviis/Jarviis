@@ -22,4 +22,5 @@
 //= require_tree ./collections
 //= require_tree ./views
 //= require_tree ./regions
+//= require_tree ./layouts
 //= require dashboard

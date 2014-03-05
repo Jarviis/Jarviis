@@ -4,4 +4,5 @@ Jarviis.Views = {};
 Jarviis.Models = {};
 Jarviis.Collections = {};
 Jarviis.Regions = {};
+Jarviis.Layouts = {};
 Jarviis.b = {};
