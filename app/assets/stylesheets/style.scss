@@ -13,10 +13,6 @@ $btn-default-bg: rgba(236, 240, 241,0.8);
 
 @import 'bootstrap';
 
-$petrol: #526476;
-$dark-blue: #34495E;
-$darker-blue: #2c3e50;
-
 .center {
   text-align: center;
 }
@@ -30,6 +26,15 @@ $darker-blue: #2c3e50;
     margin-left: -2px !important;
     background: #34495e;
   }
+  .glyphicon-search {
+    left: 28px;
+    position: relative;
+    top: 3px;
+    color: $navbar-default-bg;
+  }
+  #search {
+    padding-left: 30px;
+  }
   li {
     margin-top: 2px;
   }
@@ -40,6 +45,9 @@ $darker-blue: #2c3e50;
   .fa {
     margin-right: 10px;
   }
+}
+.pagination {
+  margin: 0;
 }
 
 #settings, #app {
