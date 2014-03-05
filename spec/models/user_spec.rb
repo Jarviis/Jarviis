@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe User do
   it { should respond_to(:name) }
+  it { should respond_to_(:username) }
 
   describe "issues associations" do
     let(:assignee) { FactoryGirl.create(:user) }
