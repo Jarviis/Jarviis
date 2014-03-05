@@ -16,6 +16,11 @@ $btn-default-bg: rgba(236, 240, 241,0.8);
 .center {
   text-align: center;
 }
+.panel-default {
+  width: 49%;
+  display: inline-block;
+  vertical-align: top;
+}
 .navbar {
   border-radius: 0;
   border: 0;
