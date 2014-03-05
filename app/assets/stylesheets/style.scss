@@ -1,5 +1,5 @@
 $navbar-default-bg: #2c3e50;
-$border-radius-base: 0;
+$border-radius-base: 3px;
 $navbar-default-brand-color: #ecf0f1;
 $navbar-default-link-color: #ecf0f1;
 $navbar-default-link-hover-color: #bdc3c7;
@@ -21,6 +21,7 @@ $darker-blue: #2c3e50;
   text-align: center;
 }
 .navbar {
+  border-radius: 0;
   border: 0;
   .navbar-brand {
     font-family: 'Blade Runner';

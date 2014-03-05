@@ -14,11 +14,11 @@
  */
 @font-face {
     font-family: 'Blade Runner';
-    src: url('/fonts/bladrmf_-webfont.eot');
-    src: url('/fonts/bladrmf_-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/fonts/bladrmf_-webfont.woff') format('woff'),
-         url('/fonts/bladrmf_-webfont.ttf') format('truetype'),
-         url('/fonts/bladrmf_-webfont.svg#blade_runner_movie_fontRg') format('svg');
+    src: url('/assets/bladrmf_-webfont.eot');
+    src: url('/assets/bladrmf_-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/bladrmf_-webfont.woff') format('woff'),
+         url('/assets/bladrmf_-webfont.ttf') format('truetype'),
+         url('/assets/bladrmf_-webfont.svg#blade_runner_movie_fontRg') format('svg');
     font-weight: normal;
     font-style: normal;
 
