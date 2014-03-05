@@ -73,6 +73,28 @@ describe Issue do
     end
   end
 
+  describe "#assignee_username" do
+    let(:issue) do
+      FactoryGirl.create(:issue,
+                         assignee_id: assignee.id,
+                         reporter_id: reporter.id)
+    end
+
+    it "returns the asignee name" do
+      expect(issue.assignee_username).to eq(assignee.username)
+    end
+
+    context "when the issue has no assignee" do
+      let(:issue_without_assignee) do
+        FactoryGirl.create(:issue, reporter_id: reporter.id)
+      end
+
+      it "returns 'Nobody'" do
+        expect(issue_without_assignee.assignee_username).to eq("Nobody")
+      end
+    end
+  end
+
   describe "#reporter_name" do
     let(:issue) do
       FactoryGirl.create(:issue,
@@ -82,6 +104,18 @@ describe Issue do
 
     it "returns the reporter name" do
       expect(issue.reporter_name).to eq(reporter.name)
+    end
+  end
+
+  describe "#reporter_name" do
+    let(:issue) do
+      FactoryGirl.create(:issue,
+                         assignee_id: assignee.id,
+                         reporter_id: reporter.id)
+    end
+
+    it "returns the reporter name" do
+      expect(issue.reporter_username).to eq(reporter.username)
     end
   end
 end
