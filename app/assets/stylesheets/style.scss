@@ -107,7 +107,7 @@ $btn-default-bg: rgba(236, 240, 241,0.8);
   }
   .modal-minimized {
     display: none;
-    background: none repeat scroll 0 0 #494949;
+    background: $navbar-default-bg;
     color: #F7F7F7;
     float: right;
     padding: 7px 13px;
