@@ -12,11 +12,22 @@ $btn-success-bg: #27ae60;
 $btn-default-bg: rgba(236, 240, 241,0.8);
 
 @import 'bootstrap';
+a, a:hover, a:active, a:focus { outline: 0 }
+#full-bg {
+  background: url('/assets/background.png');
+  background-size: cover;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
 
 .center {
   text-align: center;
 }
-.panel-default {
+#main .panel-default {
   width: 49%;
   display: inline-block;
   vertical-align: top;

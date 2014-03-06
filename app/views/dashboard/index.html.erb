@@ -1,3 +1,6 @@
+<% if !user_signed_in? %>
+  <%= render "pages/home" %>
+<% else %>
 <div id="main">
 </div>
 <script id="dashboard-template" type="text/html">
@@ -42,3 +45,4 @@
     </div>
   </div>
 </script>
+<% end %>
