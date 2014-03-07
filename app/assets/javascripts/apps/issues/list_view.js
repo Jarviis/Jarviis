@@ -1,16 +1,15 @@
-Jarviis.module("Issues.List", function(List, ContactManager, Backbone, Marionette, $, _){
-  List.Layout = Marionette.Layout.extend({
-    template: "#contact-list-layout",
-
-    regions: {
-      panelRegion: "#panel-region",
-      contactsRegion: "#contacts-region"
-    }
-  });
+Jarviis.module("Issues.List", function(List, Jarviis, Backbone, Marionette, $, _){
 
   List.Issue = Marionette.ItemView.extend({
     tagName: 'tr',
-    template: _.template("<td><%-name%></td><td><%-description%></td>")
+    template: _.template("<td><a href='#<%-id%>'><%-name%></a></td><td><%-description%></td>"),
+    events: {
+      'click a': 'navigate'
+    },
+    navigate: function(e) {
+      e.preventDefault();
+      Jarviis.Issues.Show.Controller.showIssue(this.model.id)
+    }
   });
 
   var NoIssueView = Backbone.Marionette.ItemView.extend({

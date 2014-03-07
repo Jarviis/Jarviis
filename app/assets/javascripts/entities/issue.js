@@ -11,5 +11,9 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
       this.options = options;
     }
   });
+
+  Jarviis.reqres.setHandler("issue:entity", function(id){
+    return reported_issues.where({id: id})[0]
+  });
 });
 
