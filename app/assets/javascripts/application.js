@@ -17,10 +17,8 @@
 //= require backbone
 //= require backbone.marionette
 //= require backbone-syphon
-//= require namespace
-//= require_tree ./models
-//= require_tree ./collections
-//= require_tree ./views
+//= require dashboard
+//= require_tree ./entities
+//= require_tree ./apps
 //= require_tree ./regions
 //= require_tree ./layouts
-//= require dashboard

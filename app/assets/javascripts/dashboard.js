@@ -1,25 +1,29 @@
+var apiVer = 'v1';
+Jarviis = new Backbone.Marionette.Application();
+
 Jarviis.addRegions({
-  navbar: '#nav',
+  header: '#nav',
   main: '#main',
-  modal: Jarviis.Regions.Modal
+  modal: '#modal'
 });
 
-Jarviis.addInitializer(function() {
-  Jarviis.b.assigned_issues = new Jarviis.Collections.Issues({type: "assignee", username: current_username});
-  Jarviis.b.assigned_issues.fetch();
+Jarviis.on("initialize:after", function(){
+  var assigned_issues = new Jarviis.Entities.IssueCollection();
+  assigned_issues.fetch({data: {assignee_username: current_username}});
 
-  Jarviis.b.reported_issues = new Jarviis.Collections.Issues({type: "reporter", username: current_username});
-  Jarviis.b.reported_issues.fetch();
+  var reported_issues = new Jarviis.Entities.IssueCollection();
+  reported_issues.fetch({data: {reporter_username: current_username}});
 
-  Jarviis.navbar.attachView(new Jarviis.Views.NavView({el: $(".navbar")}));
+  // Jarviis.navbar.attachView(new Jarviis.Views.NavView({el: $(".navbar")}));
 
   var dashboard = new Jarviis.Layouts.DashboardLayout();
   Jarviis.main.show(dashboard);
 
-  dashboard.assigned.show(new Jarviis.Views.IssuesView({collection: Jarviis.b.assigned_issues}));
-  dashboard.reported.show(new Jarviis.Views.IssuesView({collection: Jarviis.b.reported_issues}));
+  dashboard.assigned.show(new Jarviis.Issues.List.Issues({collection: assigned_issues}));
+  dashboard.reported.show(new Jarviis.Issues.List.Issues({collection: reported_issues}));
 });
 
 $(document).ready(function() {
   Jarviis.start();
 });
+
