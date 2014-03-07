@@ -32,6 +32,8 @@ gem 'active_model_serializers'
 
 gem 'backbone-on-rails'
 
+gem 'handlebars_assets'
+
 # Officially-supported gem for Backbone Marionette
 gem 'marionette-rails'
 

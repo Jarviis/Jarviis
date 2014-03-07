@@ -14,8 +14,10 @@
 //= require jquery_ujs
 //= require underscore
 //= require bootstrap
+//= require handlebars
 //= require backbone
 //= require backbone.marionette
+//= require_tree ./vendors
 //= require backbone-syphon
 //= require dashboard
 //= require_tree ./entities
