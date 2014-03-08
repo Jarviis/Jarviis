@@ -10,7 +10,8 @@ Jarviis.module("Issues.Show", function(Show, Jarviis, Backbone, Marionette, $, _
     },
     goBack: function (e) {
       e.preventDefault();
-      window.history.back();
+      Jarviis.Issues.List.Controller.listIssues();
+      Jarviis.navigate('/');
     }
   });
 });
