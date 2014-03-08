@@ -7,20 +7,19 @@ Jarviis.addRegions({
   modal: '#modal'
 });
 
+Jarviis.navigate = function(route, options){
+  options || (options = {});
+  Backbone.history.navigate(route, options);
+};
+
+Jarviis.getCurrentRoute = function(){
+  return Backbone.history.fragment
+};
+
 Jarviis.on("initialize:after", function(){
-  var assigned_issues = new Jarviis.Entities.IssueCollection();
-  assigned_issues.fetch({data: {assignee_username: current_username}});
-
-  window.reported_issues = new Jarviis.Entities.IssueCollection();
-  reported_issues.fetch({data: {reporter_username: current_username}});
-
-  // Jarviis.navbar.attachView(new Jarviis.Views.NavView({el: $(".navbar")}));
-
-  var dashboard = new Jarviis.Layouts.DashboardLayout();
-  Jarviis.main.show(dashboard);
-
-  dashboard.assigned.show(new Jarviis.Issues.List.Issues({collection: assigned_issues}));
-  dashboard.reported.show(new Jarviis.Issues.List.Issues({collection: reported_issues}));
+  if(Backbone.history){
+    Backbone.history.start();
+  }
 });
 
 $(document).ready(function() {

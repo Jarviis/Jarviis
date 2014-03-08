@@ -15,9 +15,7 @@ Jarviis.module("Issues.List", function(List, Jarviis, Backbone, Marionette, $, _
     },
     navigate: function(e) {
       e.preventDefault();
-      var id = this.model.id;
-      Jarviis.navigate('issues/'+id);
-      Jarviis.Issues.Show.Controller.showIssue(id);
+      Jarviis.Issues.Show.Controller.showIssue(this.model.id)
     }
   });
 
