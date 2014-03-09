@@ -1,6 +1,10 @@
 Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, _){
   Entities.Issue = Backbone.Model.extend({
-    urlRoot: '/api/'+apiVer+'/issues'
+    urlRoot: '/api/'+apiVer+'/issues',
+    parse: function(data) {
+      data.state = Jarviis.states[data.state];
+      return data;
+    }
   });
   Entities.IssueCollection = Backbone.Collection.extend({
     model: Jarviis.Entities.Issue,

@@ -23,4 +23,3 @@
 //= require_tree ./entities
 //= require_tree ./apps
 //= require_tree ./regions
-//= require_tree ./layouts

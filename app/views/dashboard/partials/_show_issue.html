@@ -1,0 +1,58 @@
+<ol class="breadcrumb">
+  <li><a href="#">Product</a></li>
+  <li><a href="#">Milestone 2</a></li>
+  <li><a href="#">Sprint 8</a></li>
+  <li class="active">Ticket #{{id}}</li>
+</ol>
+<div class="row">
+  <div class="col-md-8">
+    <div class="panel">
+      <div class="panel-heading issue-title">
+        <h3>{{name}}</h3>
+        <span class="label label-primary">{{state}}</span>
+      </div>
+      <div class="panel-body">
+        <p>{{description}}</p>
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#">Comments</a></li>
+          <li><a href="#">Workflow</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="comments">
+            <ul class="list-group">
+              <li class="list-group-item"><img src="https://secure.gravatar.com/avatar/ca017edd68f0d216c4761445bf9f28e7?s=36&amp;d=mm" class="img-rounded" alt="avatar">Cras justo odio</li>
+              <li class="list-group-item"><img src="https://secure.gravatar.com/avatar/ca017edd68f0d216c4761445bf9f28e7?s=36&amp;d=mm" class="img-rounded" alt="avatar">Dapibus ac facilisis in</li>
+              <li class="list-group-item"><img src="https://secure.gravatar.com/avatar/ca017edd68f0d216c4761445bf9f28e7?s=36&amp;d=mm" class="img-rounded" alt="avatar">Morbi leo risus</li>
+            </ul>
+          </div>
+          <div class="tab-pane" id="workflow">...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="btn-group">
+      <button type="button" class="btn btn-default">Resolve</button>
+      <button type="button" class="btn btn-default">Close</button>
+      <button type="button" class="btn btn-default">Edit</button>
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        More <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#">Action</a></li>
+        <li><a href="#">Another action</a></li>
+        <li><a href="#">Something else here</a></li>
+        <li class="divider"></li>
+        <li><a href="#">Separated link</a></li>
+      </ul>
+    </div>
+    <table class="table">
+      <tbody>
+      <tr><td>Type:</td><td>Task</td></tr>
+      <tr><td>Due Date:</td><td>Dec 25th, 2015</td></tr>
+      <tr><td>Assignee:</td><td>Captain Igloo</td></tr>
+      <tr><td>Reporter:</td><td>Dimitris Tsironis</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>

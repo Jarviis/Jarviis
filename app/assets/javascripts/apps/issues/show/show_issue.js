@@ -4,14 +4,6 @@ Jarviis.module("Issues.Show", function(Show, Jarviis, Backbone, Marionette, $, _
   });
 
   Show.Issue = Marionette.ItemView.extend({
-    template: "#show-issue-template",
-    events: {
-      'click .back': 'goBack'
-    },
-    goBack: function (e) {
-      e.preventDefault();
-      Jarviis.Issues.List.Controller.listIssues();
-      Jarviis.navigate('/');
-    }
+    template: "#show-issue-template"
   });
 });
