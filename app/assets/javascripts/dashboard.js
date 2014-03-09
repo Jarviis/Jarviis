@@ -1,17 +1,28 @@
+var apiVer = 'v1';
+Jarviis = new Backbone.Marionette.Application();
+
 Jarviis.addRegions({
-  navbar: '#nav',
-  issues: "#issues",
-  modal: Jarviis.Regions.Modal
+  header: '#nav',
+  main: '#main',
+  modal: '#modal'
 });
 
-Jarviis.addInitializer(function() {
-  Jarviis.b.issues = new Jarviis.Collections.Issues();
-  Jarviis.b.issues.fetch();
+Jarviis.navigate = function(route, options){
+  options || (options = {});
+  Backbone.history.navigate(route, options);
+};
 
-  Jarviis.navbar.attachView(new Jarviis.Views.NavView({el: $(".navbar")}));
-  Jarviis.issues.show(new Jarviis.Views.IssuesView({collection: Jarviis.b.issues}));
+Jarviis.getCurrentRoute = function(){
+  return Backbone.history.fragment
+};
+
+Jarviis.on("initialize:after", function(){
+  if(Backbone.history){
+    Backbone.history.start({pushState: true});
+  }
 });
 
 $(document).ready(function() {
   Jarviis.start();
 });
+

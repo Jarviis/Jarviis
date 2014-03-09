@@ -12,13 +12,25 @@ $btn-success-bg: #27ae60;
 $btn-default-bg: rgba(236, 240, 241,0.8);
 
 @import 'bootstrap';
-
-$petrol: #526476;
-$dark-blue: #34495E;
-$darker-blue: #2c3e50;
+a, a:hover, a:active, a:focus { outline: 0 }
+#full-bg {
+  background: url('/assets/background.png');
+  background-size: cover;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
 
 .center {
   text-align: center;
+}
+#main .panel-default {
+  width: 49%;
+  display: inline-block;
+  vertical-align: top;
 }
 .navbar {
   border-radius: 0;
@@ -30,6 +42,15 @@ $darker-blue: #2c3e50;
     margin-left: -2px !important;
     background: #34495e;
   }
+  .glyphicon-search {
+    left: 28px;
+    position: relative;
+    top: 3px;
+    color: $navbar-default-bg;
+  }
+  #search {
+    padding-left: 30px;
+  }
   li {
     margin-top: 2px;
   }
@@ -40,6 +61,9 @@ $darker-blue: #2c3e50;
   .fa {
     margin-right: 10px;
   }
+}
+.pagination {
+  margin: 0;
 }
 
 #settings, #app {
@@ -94,7 +118,7 @@ $darker-blue: #2c3e50;
   }
   .modal-minimized {
     display: none;
-    background: none repeat scroll 0 0 #494949;
+    background: $navbar-default-bg;
     color: #F7F7F7;
     float: right;
     padding: 7px 13px;
