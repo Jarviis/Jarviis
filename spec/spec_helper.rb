@@ -48,4 +48,5 @@ end
 
 def delete_indexes
   Issue.index.delete
+  User.index.delete
 end
