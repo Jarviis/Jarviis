@@ -21,6 +21,9 @@
   <%= javascript_include_tag "application" %>
   <script type="text/javascript" charset="utf-8">
     window.current_username = "<%= current_user.username %>";
+    $(document).ready(function() {
+      Jarviis.start();
+    });
   </script>
 </body>
 </html>

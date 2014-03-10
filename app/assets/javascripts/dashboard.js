@@ -12,7 +12,7 @@ Jarviis.states = [
 Jarviis.addRegions({
   header: '#nav',
   main: '#main',
-  modal: '#modal'
+  modal: Marionette.Region.Modal.extend({el: '#modal'})
 });
 
 Jarviis.navigate = function(route, options){
@@ -25,12 +25,8 @@ Jarviis.getCurrentRoute = function(){
 };
 
 Jarviis.on("initialize:after", function(){
+  Jarviis.header.attachView(new Jarviis.Header.View({el: $(".navbar")}));
   if(Backbone.history){
     Backbone.history.start({pushState: true});
   }
 });
-
-$(document).ready(function() {
-  Jarviis.start();
-});
-
