@@ -3,60 +3,16 @@
 <% else %>
 <div id="main">
 </div>
-<script id="dashboard-template" type="text/html">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">My Assigned Issues</h3>
-    </div>
-    <div class="panel-body">
-      <ul id="assigned">
-      </ul>
-    </div>
-    <div class="panel-footer">
-      <ul class="pagination">
-        <li><a href="#">&laquo;</a></li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">&raquo;</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">My Reported Issues</h3>
-    </div>
-    <div class="panel-body">
-      <ul id="reported">
-      </ul>
-    </div>
-    <div class="panel-footer">
-      <ul class="pagination">
-        <li><a href="#">&laquo;</a></li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">&raquo;</a></li>
-      </ul>
-    </div>
-  </div>
+<script id="issues-template" type="text/x-handlebars-template">
+  <%= render 'dashboard/partials/issues_template' %>
 </script>
 <script id="show-issue-template" type="text/x-handlebars-template">
-<h2>
-<a href="#" class="back"><i class="fa fa-arrow-left"></i></a>
-{{name}}
-</h2>
-<p>{{description}}</p>
+  <%= render 'dashboard/partials/show_issue' %>
 </script>
-<script id="list-template" type="text/html">
-  <thead><tr><th>Issue</th><th>Description</th></tr></thead>
-  <tbody></tbody>
+<script id="list-issues-template" type="text/x-handlebars-template">
+  <%= render 'dashboard/partials/list_issues' %>
 </script>
 <script id="missing-issue-template" type="text/x-handlebars-template">
-  Missing Issue.
+  <%= render 'dashboard/partials/missing_issue' %>
 </script>
 <% end %>
