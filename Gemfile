@@ -68,6 +68,9 @@ group :development, :test do
   gem 'pry-debugger'
 
   gem "rspec-rails"
+
+  # Javascript testing
+  gem "teaspoon"
 end
 
 group :test do
