@@ -19,7 +19,7 @@
 //= require backbone.marionette
 //= require_tree ./vendors
 //= require backbone-syphon
-//= require ./common/regions/modal
+//= require_tree ./common
 //= require dashboard
 //= require_tree ./entities
 //= require_tree ./apps
