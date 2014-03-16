@@ -4,17 +4,14 @@
   <title>Jarviis</title>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,400italic&subset=latin,greek' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag "application", media: "all" %>
+  <%= javascript_include_tag "landing" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <%= render 'layouts/header' %>
+  <%= render 'layouts/alerts' %>
   <main <% if request.fullpath == '/' %>id="landing"<% end %>>
-  <div class="container">
-    <% flash.each do |name, msg| %>
-     <%= content_tag(:div, msg, class: "alert alert-info") %>
-    <% end %>
     <%= yield %>
-  </div>
   </main>
 </body>
 </html>
