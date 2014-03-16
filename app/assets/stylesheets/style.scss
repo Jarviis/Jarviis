@@ -58,14 +58,21 @@ a, a:hover, a:active, a:focus { outline: 0 }
   .dropdown-menu {
     margin-top: 3px!important;
   }
-  .glyphicon-search {
+  .fa-terminal {
     left: 28px;
     position: relative;
     top: 3px;
-    color: $navbar-default-bg;
+    color: #f7f7f7;
+    font-size: 20px;
   }
   #search {
+    background: transparent;
+    border: 0;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
     padding-left: 30px;
+    color: #16a085;
   }
   li {
     margin-top: 2px;
@@ -76,6 +83,10 @@ a, a:hover, a:active, a:focus { outline: 0 }
   }
   .fa {
     margin-right: 10px;
+  }
+  .form-control::-moz-placeholder {
+    font-style: italic;
+    color: #1abc9c;
   }
 }
 .pagination {
