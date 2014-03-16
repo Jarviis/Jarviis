@@ -12,6 +12,14 @@ $btn-default-bg: rgba(236, 240, 241,0.8);
 
 @import 'bootstrap';
 a, a:hover, a:active, a:focus { outline: 0 }
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+main#landing {
+  margin-top: 150px;
+  background: none repeat scroll 0 0 rgba(44, 62, 80, 0.6);
+  color: #F7F7F7;
+}
 #full-bg {
   background: url('/assets/background.png');
   background-size: cover;
@@ -38,6 +46,7 @@ a, a:hover, a:active, a:focus { outline: 0 }
 }
 
 .center {
+  margin: 30px 0;
   text-align: center;
 }
 #main .panel-default {
