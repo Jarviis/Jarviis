@@ -14,6 +14,8 @@ class Issue < ActiveRecord::Base
     WONTFIX => "wontfix"
   }
 
+  PER_PAGE = 15
+
   mapping do
     indexes :id, type: "integer"
     indexes :assignee_id, type: "integer"
@@ -44,7 +46,7 @@ class Issue < ActiveRecord::Base
 
   # Search criteria
   def self.search(params)
-    tire.search do |es|
+    tire.search(page: params[:page] || 1, per_page: PER_PAGE) do |es|
       es.query { string params[:query], default_operator: "AND" } if params[:query].present?
       es.filter :term, assignee_id: params[:assignee_id] if params[:assignee_id]
       es.filter :term, reporter_id: params[:reporter_id] if params[:reporter_id]
