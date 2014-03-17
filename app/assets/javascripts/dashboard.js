@@ -3,10 +3,10 @@ var apiVer = 'v1';
 Jarviis = new Backbone.Marionette.Application();
 
 Jarviis.states = [
-  'Open',
-  'Resolved',
-  'Closed',
-  'Wontfix'
+  'open',
+  'resolved',
+  'closed',
+  'wontfix'
 ];
 
 Jarviis.addRegions({
