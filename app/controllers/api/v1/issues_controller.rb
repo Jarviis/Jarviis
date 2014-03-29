@@ -1,5 +1,5 @@
 class Api::V1::IssuesController < Api::V1::ApiController
-  before_action :set_issue, only: [:show, :edit, :update, :destroy]
+  before_action :set_issue, only: [:show, :edit, :update, :destroy, :resolve]
   def index
     @issues = Issue.search(params)
 
@@ -33,6 +33,14 @@ class Api::V1::IssuesController < Api::V1::ApiController
     @issue.destroy
 
     render json: { status: :destroyed }
+  end
+
+  def resolve
+    if @issue.resolve!
+      render json: { status: :updated }
+    else
+      render json: { errors: "#{self.name} was not open", status: :unprocessable_entity }
+    end
   end
 
   private
