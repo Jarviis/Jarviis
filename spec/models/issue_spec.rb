@@ -156,4 +156,42 @@ describe Issue do
       end
     end
   end
+
+  describe "#close!" do
+    context "when the issue is open" do
+      let(:issue) do
+        FactoryGirl.create(:issue, :open,
+                           assignee_id: assignee.id,
+                           reporter_id: reporter.id)
+      end
+
+      it "returns true" do
+        expect(issue.close!).to eq(true)
+      end
+
+      it "changes the state to resolved" do
+        expect {
+          issue.close!
+        }.to change { issue.reload.state }.to(Issue::CLOSED)
+      end
+    end
+
+    context "when the issue is not open" do
+      let(:issue) do
+        FactoryGirl.create(:issue, :closed,
+                           assignee_id: assignee.id,
+                           reporter_id: reporter.id)
+      end
+
+      it "returns false" do
+        expect(issue.close!).to eq(false)
+      end
+
+      it "does not change the state" do
+        expect {
+          issue.close!
+        }.not_to change { issue.reload.state }
+      end
+    end
+  end
 end

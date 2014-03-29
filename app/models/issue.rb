@@ -87,4 +87,12 @@ class Issue < ActiveRecord::Base
     self.state = Issue::RESOLVED
     self.save
   end
+
+  # @return [Boolean] True if the state transition was valid
+  def close!
+    return false if self.state != Issue::OPEN
+
+    self.state = Issue::CLOSED
+    self.save
+  end
 end
