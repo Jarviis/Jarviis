@@ -194,4 +194,18 @@ describe Issue do
       end
     end
   end
+
+  describe "#wontfix!" do
+    let(:issue) do
+      FactoryGirl.create(:issue, :closed,
+                         assignee_id: assignee.id,
+                         reporter_id: reporter.id)
+    end
+
+    it "changes the issue status to wontfix" do
+      expect {
+        issue.wontfix!
+      }.to change { issue.reload.state }.to(Issue::WONTFIX)
+    end
+  end
 end
