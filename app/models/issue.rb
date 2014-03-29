@@ -101,4 +101,11 @@ class Issue < ActiveRecord::Base
 
     self.save
   end
+
+  def open!
+    return false if self.state == Issue::OPEN
+
+    self.state = Issue::OPEN
+    self.save
+  end
 end

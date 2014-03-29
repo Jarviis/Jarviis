@@ -208,4 +208,34 @@ describe Issue do
       }.to change { issue.reload.state }.to(Issue::WONTFIX)
     end
   end
+
+  describe "#open!" do
+    let(:issue) do
+      FactoryGirl.create(:issue, :closed,
+                         assignee_id: assignee.id,
+                         reporter_id: reporter.id)
+    end
+
+    it "changes the issue status to open" do
+      expect {
+        issue.open!
+      }.to change { issue.reload.state }.to(Issue::OPEN)
+    end
+
+    it "returns true" do
+      expect(issue.open!).to eq(true)
+    end
+
+    describe "when status is already open" do
+      let(:issue) do
+        FactoryGirl.create(:issue,
+                           assignee_id: assignee.id,
+                           reporter_id: reporter.id)
+      end
+
+      it "returns false" do
+        expect(issue.open!).to eq(false)
+      end
+    end
+  end
 end
