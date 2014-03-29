@@ -184,4 +184,42 @@ describe Api::V1::IssuesController do
       end
     end
   end
+
+  describe "POST wontfix" do
+    let(:reporter) { FactoryGirl.create(:user) }
+    let!(:issue) { FactoryGirl.create(:issue, name: "OLD", reporter_id: reporter.id) }
+
+    it "calls wontfix! on issue" do
+      Issue.any_instance.should_receive(:wontfix!)
+
+      post :wontfix, id: issue.id
+    end
+
+    it "returns status closed" do
+      post :wontfix, id: issue.id
+
+      expect(json_response["status"]).to eq("wontfix")
+    end
+
+    context "with any state" do
+      let!(:closed_issue) do
+        FactoryGirl.create(:issue,
+                           state: Issue::CLOSED,
+                           name: "OLD",
+                           reporter_id: reporter.id)
+      end
+
+      it "calls wontfix! on issue" do
+        Issue.any_instance.should_receive(:wontfix!)
+
+        post :wontfix, id: issue.id
+      end
+
+      it "returns status wontfix" do
+        post :wontfix, id: issue.id
+
+        expect(json_response["status"]).to eq("wontfix")
+      end
+    end
+  end
 end
