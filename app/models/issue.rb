@@ -95,4 +95,10 @@ class Issue < ActiveRecord::Base
     self.state = Issue::CLOSED
     self.save
   end
+
+  def wontfix!
+    self.state = Issue::WONTFIX
+
+    self.save
+  end
 end
