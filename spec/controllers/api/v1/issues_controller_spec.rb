@@ -202,13 +202,6 @@ describe Api::V1::IssuesController do
     end
 
     context "with any state" do
-      let!(:closed_issue) do
-        FactoryGirl.create(:issue,
-                           state: Issue::CLOSED,
-                           name: "OLD",
-                           reporter_id: reporter.id)
-      end
-
       it "calls wontfix! on issue" do
         Issue.any_instance.should_receive(:wontfix!)
 
@@ -219,6 +212,42 @@ describe Api::V1::IssuesController do
         post :wontfix, id: issue.id
 
         expect(json_response["status"]).to eq("wontfix")
+      end
+    end
+  end
+
+  describe "open" do
+    let(:reporter) { FactoryGirl.create(:user) }
+    let!(:closed_issue) do
+      FactoryGirl.create(:issue,
+                         state: Issue::CLOSED,
+                         name: "OLD",
+                         reporter_id: reporter.id)
+    end
+
+    it "calls open! on issue" do
+      Issue.any_instance.should_receive(:open!)
+
+      post :open, id: closed_issue.id
+    end
+
+    it "returns status opened" do
+      post :open, id: closed_issue.id
+
+      expect(json_response["status"]).to eq("opened")
+    end
+
+    context "when is already open" do
+      let!(:issue) do
+        FactoryGirl.create(:issue,
+                           name: "OLD",
+                           reporter_id: reporter.id)
+      end
+
+      it "returns errors" do
+        post :open, id: issue.id
+
+        expect(json_response["status"]).to be
       end
     end
   end
