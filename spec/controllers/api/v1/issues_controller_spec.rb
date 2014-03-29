@@ -146,4 +146,42 @@ describe Api::V1::IssuesController do
       end
     end
   end
+
+  describe "POST close" do
+    let(:reporter) { FactoryGirl.create(:user) }
+    let!(:issue) { FactoryGirl.create(:issue, name: "OLD", reporter_id: reporter.id) }
+
+    it "calls close! on issue" do
+      Issue.any_instance.should_receive(:close!)
+
+      post :close, id: issue.id
+    end
+
+    it "returns status closed" do
+      post :close, id: issue.id
+
+      expect(json_response["status"]).to eq("closed")
+    end
+
+    context "when the state transition is invalid" do
+      let!(:closed_issue) do
+        FactoryGirl.create(:issue,
+                           state: Issue::CLOSED,
+                           name: "OLD",
+                           reporter_id: reporter.id)
+      end
+
+      it "returns errors" do
+        post :close, id: closed_issue.id
+
+        expect(json_response["errors"]).to be
+      end
+
+      it "returns status unprocessable_entity" do
+        post :close, id: closed_issue.id
+
+        expect(json_response["status"]).to eq("unprocessable_entity")
+      end
+    end
+  end
 end
