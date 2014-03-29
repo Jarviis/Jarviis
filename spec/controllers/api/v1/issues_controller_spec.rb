@@ -108,4 +108,17 @@ describe Api::V1::IssuesController do
       expect(json_response["status"]).to eq("destroyed")
     end
   end
+
+  describe "POST resolve" do
+    let(:reporter) { FactoryGirl.create(:user) }
+    let!(:issue) { FactoryGirl.create(:issue, name: "OLD", reporter_id: reporter.id) }
+
+    it "changes the state of issue to RESOLVED" do
+      expect {
+        post :resolve, id: issue.id
+      }.to change {
+        issue.reload.state
+      }.from(Issue::OPEN).to(Issue::RESOLVED)
+    end
+  end
 end

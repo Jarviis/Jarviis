@@ -79,4 +79,12 @@ class Issue < ActiveRecord::Base
   def reporter_username
     reporter.username
   end
+
+  # @return [Boolean] True if the state transition was valid
+  def resolve!
+    return false if self.state != Issue::OPEN
+
+    self.state = Issue::RESOLVED
+    self.save
+  end
 end
