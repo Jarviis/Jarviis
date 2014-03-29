@@ -6,6 +6,7 @@ Jarviis::Application.routes.draw do
         member do
           post :resolve
           post :close
+          post :wontfix
         end
       end
       resources :users, only: :index
