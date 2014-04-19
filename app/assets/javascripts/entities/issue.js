@@ -2,8 +2,20 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
   Entities.Issue = Backbone.Model.extend({
     urlRoot: '/api/'+apiVer+'/issues',
     parse: function(data) {
-      data.state = Jarviis.states[data.state];
+      data.status = Jarviis.states[data.state];
       return data;
+    },
+    resolve: function () {
+      this.changeState('resolve');
+    },
+    changeState: function (action) {
+      var url = '/api/'+apiVer+'/issues/'+this.get('id')+'/'+action;
+      var self = this;
+      $.ajax({url: url, type: "POST"})
+        .done(function (data) {
+          if(!data.errors)
+            self.set(data);
+        });
     }
   });
   Entities.IssueCollection = Backbone.Collection.extend({

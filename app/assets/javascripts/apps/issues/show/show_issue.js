@@ -4,6 +4,17 @@ Jarviis.module("Issues.Show", function(Show, Jarviis, Backbone, Marionette, $, _
   });
 
   Show.Issue = Marionette.ItemView.extend({
-    template: "#show-issue-template"
+    template: "#show-issue-template",
+    events: {
+      'click button#resolve': 'resolveIssue',
+      'click button#open': 'openIssue'
+    },
+    modelEvents: {
+      "change": "render"
+    },
+    resolveIssue: function () {
+      this.model.resolve();
+    }
   });
 });
+
