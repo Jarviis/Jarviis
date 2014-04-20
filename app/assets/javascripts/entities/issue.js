@@ -8,6 +8,9 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
     resolve: function () {
       this.changeState('resolve');
     },
+    open: function() {
+      this.changeState('open');
+    },
     changeState: function (action) {
       var url = '/api/'+apiVer+'/issues/'+this.get('id')+'/'+action;
       var self = this;
@@ -27,7 +30,7 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
       this.options = options;
     }
   });
-  
+
   var API = {
     getIssueEntity: function(issueId){
       var issue = new Entities.Issue({id: issueId});

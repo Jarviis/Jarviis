@@ -231,10 +231,10 @@ describe Api::V1::IssuesController do
       post :open, id: closed_issue.id
     end
 
-    it "returns status opened" do
+    it "returns status open" do
       post :open, id: closed_issue.id
 
-      expect(json_response["status"]).to eq("opened")
+      expect(json_response["status"]).to eq("open")
     end
 
     context "when is already open" do

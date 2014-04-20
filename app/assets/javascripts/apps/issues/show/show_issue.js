@@ -14,6 +14,9 @@ Jarviis.module("Issues.Show", function(Show, Jarviis, Backbone, Marionette, $, _
     },
     resolveIssue: function () {
       this.model.resolve();
+    },
+    openIssue: function() {
+      this.model.open();
     }
   });
 });

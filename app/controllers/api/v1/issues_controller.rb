@@ -60,7 +60,7 @@ class Api::V1::IssuesController < Api::V1::ApiController
 
   def open
     if @issue.open!
-      render json: { status: :opened }
+      render json: { status: :open }
     else
       render json: { errors: "Issue##{@issue.id} was already open", status: :unprocessable_entity }
     end
