@@ -11,6 +11,9 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
     open: function() {
       this.changeState('open');
     },
+    close: function() {
+      this.changeState('close');
+    },
     changeState: function (action) {
       var url = '/api/'+apiVer+'/issues/'+this.get('id')+'/'+action;
       var self = this;

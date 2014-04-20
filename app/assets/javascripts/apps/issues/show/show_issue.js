@@ -7,7 +7,8 @@ Jarviis.module("Issues.Show", function(Show, Jarviis, Backbone, Marionette, $, _
     template: "#show-issue-template",
     events: {
       'click button#resolve': 'resolveIssue',
-      'click button#open': 'openIssue'
+      'click button#open': 'openIssue',
+      'click button#close': 'closeIssue'
     },
     modelEvents: {
       "change": "render"
@@ -17,6 +18,9 @@ Jarviis.module("Issues.Show", function(Show, Jarviis, Backbone, Marionette, $, _
     },
     openIssue: function() {
       this.model.open();
+    },
+    closeIssue: function() {
+      this.model.close();
     }
   });
 });
