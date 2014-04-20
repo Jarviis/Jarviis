@@ -9,7 +9,7 @@
     <div class="panel">
       <div class="panel-heading issue-title">
         <h3>{{name}}</h3>
-        <span class="label label-primary">{{state}}</span>
+        <span class="label label-primary">{{status}}</span>
       </div>
       <div class="panel-body">
         <p>{{description}}</p>
@@ -32,8 +32,9 @@
   </div>
   <div class="col-md-4">
     <div class="btn-group">
-      <button type="button" class="btn btn-default">Resolve</button>
-      <button type="button" class="btn btn-default">Close</button>
+      <button type="button" class="btn btn-default" id="resolve">Resolve</button>
+      <button type="button" class="btn btn-default" id="open">Open</button>
+      <button type="button" class="btn btn-default" id="close">Close</button>
       <button type="button" class="btn btn-default">Edit</button>
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
         More <span class="caret"></span>

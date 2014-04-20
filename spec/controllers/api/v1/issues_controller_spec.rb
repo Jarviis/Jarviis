@@ -1,8 +1,14 @@
 require "spec_helper"
 
 describe Api::V1::IssuesController do
+  include Devise::TestHelpers
 
   let(:json_response) { JSON.parse(response.body) }
+
+  before(:each) do
+    @user = FactoryGirl.create(:user)
+    sign_in @user
+  end
 
   describe "#index" do
     let(:reporter) { FactoryGirl.create(:user) }
@@ -106,6 +112,149 @@ describe Api::V1::IssuesController do
       delete :destroy, id: issue.id
 
       expect(json_response["status"]).to eq("destroyed")
+    end
+  end
+
+  describe "POST resolve" do
+    let(:reporter) { FactoryGirl.create(:user) }
+    let!(:issue) { FactoryGirl.create(:issue, name: "OLD", reporter_id: reporter.id) }
+
+    it "calls resolve! on issue" do
+      Issue.any_instance.should_receive(:resolve!)
+
+      post :resolve, id: issue.id
+    end
+
+    it "returns status updated" do
+      post :resolve, id: issue.id
+
+      expect(json_response["status"]).to eq("resolved")
+    end
+
+    context "when the state transition is invalid" do
+      let!(:closed_issue) do
+        FactoryGirl.create(:issue,
+                           state: Issue::CLOSED,
+                           name: "OLD",
+                           reporter_id: reporter.id)
+      end
+
+      it "returns errors" do
+        post :resolve, id: closed_issue.id
+
+        expect(json_response["errors"]).to be
+      end
+
+      it "returns status unprocessable_entity" do
+        post :resolve, id: closed_issue.id
+
+        expect(json_response["status"]).to eq("unprocessable_entity")
+      end
+    end
+  end
+
+  describe "POST close" do
+    let(:reporter) { FactoryGirl.create(:user) }
+    let!(:issue) { FactoryGirl.create(:issue, name: "OLD", reporter_id: reporter.id) }
+
+    it "calls close! on issue" do
+      Issue.any_instance.should_receive(:close!)
+
+      post :close, id: issue.id
+    end
+
+    it "returns status closed" do
+      post :close, id: issue.id
+
+      expect(json_response["status"]).to eq("closed")
+    end
+
+    context "when the state transition is invalid" do
+      let!(:closed_issue) do
+        FactoryGirl.create(:issue,
+                           state: Issue::CLOSED,
+                           name: "OLD",
+                           reporter_id: reporter.id)
+      end
+
+      it "returns errors" do
+        post :close, id: closed_issue.id
+
+        expect(json_response["errors"]).to be
+      end
+
+      it "returns status unprocessable_entity" do
+        post :close, id: closed_issue.id
+
+        expect(json_response["status"]).to eq("unprocessable_entity")
+      end
+    end
+  end
+
+  describe "POST wontfix" do
+    let(:reporter) { FactoryGirl.create(:user) }
+    let!(:issue) { FactoryGirl.create(:issue, name: "OLD", reporter_id: reporter.id) }
+
+    it "calls wontfix! on issue" do
+      Issue.any_instance.should_receive(:wontfix!)
+
+      post :wontfix, id: issue.id
+    end
+
+    it "returns status closed" do
+      post :wontfix, id: issue.id
+
+      expect(json_response["status"]).to eq("wontfix")
+    end
+
+    context "with any state" do
+      it "calls wontfix! on issue" do
+        Issue.any_instance.should_receive(:wontfix!)
+
+        post :wontfix, id: issue.id
+      end
+
+      it "returns status wontfix" do
+        post :wontfix, id: issue.id
+
+        expect(json_response["status"]).to eq("wontfix")
+      end
+    end
+  end
+
+  describe "open" do
+    let(:reporter) { FactoryGirl.create(:user) }
+    let!(:closed_issue) do
+      FactoryGirl.create(:issue,
+                         state: Issue::CLOSED,
+                         name: "OLD",
+                         reporter_id: reporter.id)
+    end
+
+    it "calls open! on issue" do
+      Issue.any_instance.should_receive(:open!)
+
+      post :open, id: closed_issue.id
+    end
+
+    it "returns status open" do
+      post :open, id: closed_issue.id
+
+      expect(json_response["status"]).to eq("open")
+    end
+
+    context "when is already open" do
+      let!(:issue) do
+        FactoryGirl.create(:issue,
+                           name: "OLD",
+                           reporter_id: reporter.id)
+      end
+
+      it "returns errors" do
+        post :open, id: issue.id
+
+        expect(json_response["status"]).to be
+      end
     end
   end
 end

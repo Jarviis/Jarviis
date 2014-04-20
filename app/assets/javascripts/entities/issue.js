@@ -2,8 +2,26 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
   Entities.Issue = Backbone.Model.extend({
     urlRoot: '/api/'+apiVer+'/issues',
     parse: function(data) {
-      data.state = Jarviis.states[data.state];
+      data.status = Jarviis.states[data.state];
       return data;
+    },
+    resolve: function () {
+      this.changeState('resolve');
+    },
+    open: function() {
+      this.changeState('open');
+    },
+    close: function() {
+      this.changeState('close');
+    },
+    changeState: function (action) {
+      var url = '/api/'+apiVer+'/issues/'+this.get('id')+'/'+action;
+      var self = this;
+      $.ajax({url: url, type: "POST"})
+        .done(function (data) {
+          if(!data.errors)
+            self.set(data);
+        });
     }
   });
   Entities.IssueCollection = Backbone.Collection.extend({
@@ -15,7 +33,7 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
       this.options = options;
     }
   });
-  
+
   var API = {
     getIssueEntity: function(issueId){
       var issue = new Entities.Issue({id: issueId});

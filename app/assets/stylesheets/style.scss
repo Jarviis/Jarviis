@@ -5,7 +5,7 @@ $navbar-default-link-color: #ecf0f1;
 $navbar-default-link-hover-color: #bdc3c7;
 $navbar-default-link-active-color: #bdc3c7;
 $navbar-default-link-active-bg: #2c3e50;
-$jumbotron-bg: transparent;
+$jumbotron-bg: rgba(255, 255, 255, 0);
 $navbar-padding-vertical: 10px;
 $btn-success-bg: #27ae60;
 $btn-default-bg: rgba(236, 240, 241,0.8);
@@ -41,6 +41,7 @@ main#landing {
     display: inline-block;
   }
   .label {
+    text-transform: capitalize;
     vertical-align: super;
   }
 }

@@ -2,7 +2,14 @@ Jarviis::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :issues
+      resources :issues do
+        member do
+          post :resolve
+          post :close
+          post :wontfix
+          post :open
+        end
+      end
       resources :users, only: :index
     end
   end
