@@ -1,8 +1,14 @@
 require "spec_helper"
 
 describe Api::V1::IssuesController do
+  include Devise::TestHelpers
 
   let(:json_response) { JSON.parse(response.body) }
+
+  before(:each) do
+    @user = FactoryGirl.create(:user)
+    sign_in @user
+  end
 
   describe "#index" do
     let(:reporter) { FactoryGirl.create(:user) }
