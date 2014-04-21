@@ -1,6 +1,6 @@
 postgresql: &postgresql
   adapter: postgresql
-  username: postres
+  username: postgres
   password:
   database: jarviis_<%= Rails.env %>
   min_messages: ERROR
