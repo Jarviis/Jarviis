@@ -1,0 +1,19 @@
+postgresql: &postgresql
+  adapter: postgresql
+  username: postres
+  password:
+  database: jarviis_<%= Rails.env %>
+  min_messages: ERROR
+
+defaults: &defaults
+  pool: 5
+  timeout: 5000
+  host: localhost
+  <<: *postgresql
+
+development:
+  <<: *defaults
+test:
+  <<: *defaults
+production:
+  <<: *defaults
