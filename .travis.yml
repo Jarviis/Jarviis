@@ -8,5 +8,6 @@ script:
 before_script:
   - cp config/database.travis.yml config/database.yml
   - psql -c 'create database jarviis_test' -U postgres
+  - RAILS_ENV=test rake db:migrate
 services:
   - elasticsearch
