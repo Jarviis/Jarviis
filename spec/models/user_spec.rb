@@ -17,11 +17,11 @@ describe User do
     end
 
     it "returns the assigned issues to the assignee" do
-      expect(assignee.assigned_issues).to eq(issues)
+      expect(assignee.assigned_issues).to match_array(issues)
     end
 
     it "returns the reported issues to the reporter" do
-      expect(reporter.reported_issues).to eq(issues)
+      expect(reporter.reported_issues).to match_array(issues)
     end
 
     context "when assignee has no reported issues" do
