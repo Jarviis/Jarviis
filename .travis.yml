@@ -2,9 +2,8 @@ language: ruby
 rvm:
   - 2.1.0
 script:
-  - bundle exec rspec spec
   - bundle exec rake db:test:prepare
-  - RAILS_ENV=test ./lib/script/index_all.sh
+  - bundle exec rspec spec
 before_script:
   - cp config/database.travis.yml config/database.yml
   - psql -c 'create database jarviis_test' -U postgres
