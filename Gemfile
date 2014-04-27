@@ -20,7 +20,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'devise'
 
 # ElasticSearch
-gem 'tire'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 # Pagination
 gem 'kaminari'
