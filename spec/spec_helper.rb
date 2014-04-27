@@ -13,6 +13,9 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 # Maintain the test schema
 ActiveRecord::Migration.maintain_test_schema!
 
+Issue.__elasticsearch__.create_index! force: true
+User.__elasticsearch__.create_index! force: true
+
 RSpec.configure do |config|
   # ## Mock Framework
   #
