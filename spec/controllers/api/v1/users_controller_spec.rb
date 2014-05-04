@@ -11,6 +11,8 @@ describe Api::V1::UsersController do
   let(:json_response) { JSON.parse(response.body) }
 
   describe "GET index" do
+    let!(:users) { FactoryGirl.create_list(:user, 2) }
+
     it "returns all issues" do
       get :index
       users = User.all
