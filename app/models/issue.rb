@@ -1,6 +1,5 @@
 class Issue < ActiveRecord::Base
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  include Searchable::Issue
 
   OPEN = 0
   RESOLVED = 1
@@ -18,25 +17,6 @@ class Issue < ActiveRecord::Base
 
   paginates_per 15
 
-  settings index: { number_of_shards: 1 } do
-    mappings dynamic: 'false' do
-      indexes :id, type: "integer"
-      indexes :assignee_id, type: "integer"
-      indexes :assignee_name, boost: 10
-      indexes :assignee_username, boost: 20
-      indexes :reporter_id, type: "integer"
-      indexes :reporter_name, boost: 10
-      indexes :reporter_username, boost: 20
-      indexes :name
-      indexes :username
-      indexes :state, type: "integer"
-      indexes :description
-      indexes :created_at, type: "date"
-      indexes :updated_at, type: "date"
-      indexes :due_date, type: "date"
-    end
-  end
-
   belongs_to :reporter, class_name: "User", foreign_key: "reporter_id"
   belongs_to :assignee, class_name: "User", foreign_key: "assignee_id"
 
@@ -46,18 +26,6 @@ class Issue < ActiveRecord::Base
   # @return [String] A humananized representation of the state of the issue.
   def state_to_s
     HUMANIZED_STATE[self.state]
-  end
-
-  # Search criteria
-  def self.search(params)
-    self.__elasticsearch__.search(params[:query]) do |es|
-      es.query { string params[:query], default_operator: "AND" } if params[:query].present?
-      es.filter :term, assignee_id: params[:assignee_id] if params[:assignee_id]
-      es.filter :term, reporter_id: params[:reporter_id] if params[:reporter_id]
-      es.filter :term, assignee_username: params[:assignee_username] if params[:assignee_username]
-      es.filter :term, reporter_username: params[:reporter_username] if params[:reporter_username]
-      es.sort { by :created_at, "desc" } if params[:query].blank?
-    end.page(params[:page])
   end
 
   def as_indexed_json(options={})
