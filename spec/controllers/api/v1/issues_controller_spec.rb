@@ -10,7 +10,7 @@ describe Api::V1::IssuesController do
     sign_in @user
   end
 
-  describe "#index" do
+  describe "GET index" do
     let(:reporter) { FactoryGirl.create(:user) }
     let!(:issues) { FactoryGirl.create_list(:issue, 2, reporter_id: reporter.id) }
 
@@ -20,6 +20,22 @@ describe Api::V1::IssuesController do
       expected = JSON.parse(issues.map{ |i| IssueSerializer.new(i) }.to_json)
 
       expect(json_response).to eq(expected)
+    end
+  end
+
+  describe "GET search" do
+    let(:reporter) { FactoryGirl.create(:user) }
+    let!(:issues) { FactoryGirl.create_list(:issue, 2, reporter_id: reporter.id) }
+
+
+    context "with empty query" do
+      it "returns all Issues" do
+        get :search
+
+        expected = JSON.parse(issues.map { |i| IssueSerializer.new(i) }.to_json)
+
+        expect(json_response).to eq(expected)
+      end
     end
   end
 
