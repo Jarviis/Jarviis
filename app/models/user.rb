@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  include Searchable::User
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -9,17 +8,6 @@ class User < ActiveRecord::Base
 
   index_name "users_#{Rails.env}"
 
-  settings index: { number_of_shards: 1 } do
-    mappings dynamic: 'false' do
-      indexes :id, type: "integer"
-      indexes :email, boost: 10
-      indexes :name
-      indexes :username, boost: 10
-      indexes :created_at, type: "date"
-      indexes :updated_at, type: "date"
-    end
-  end
-
   has_many :assigned_issues, class_name: "Issue", foreign_key: "assignee_id"
   has_many :reported_issues, class_name: "Issue", foreign_key: "reporter_id"
   has_many :team_relationships
@@ -27,14 +15,4 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :username
   validates_presence_of   :username
-
-  def self.search(params)
-    self.__elasticsearch__.search(params[:query]) do |es|
-      es.query { string params[:query], default_operator: "AND" } if params[:query].present?
-      es.filter :term, username: params[:username] if params[:username]
-      es.filter :term, email: params[:username] if params[:username]
-      es.filter :term, name: params[:name] if params[:name]
-    end
-
-  end
 end
