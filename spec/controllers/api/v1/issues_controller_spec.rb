@@ -17,7 +17,9 @@ describe Api::V1::IssuesController do
     it "returns all issues" do
       get :index
 
-      expect(response.body).to eq(Issue.search({}).to_json)
+      expected = JSON.parse(issues.map{ |i| IssueSerializer.new(i) }.to_json)
+
+      expect(json_response).to eq(expected)
     end
   end
 

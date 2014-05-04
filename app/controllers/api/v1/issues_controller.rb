@@ -2,7 +2,7 @@ class Api::V1::IssuesController < Api::V1::ApiController
   before_action :set_issue, only: [:show, :edit, :update, :destroy,
                                    :resolve, :close, :wontfix, :open]
   def index
-    @issues = Issue.search(params)
+    @issues = Issue.page(params[:page] || 1)
 
     render json: @issues
   end
