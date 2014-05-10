@@ -17,3 +17,6 @@
 .rvmrc
 .ruby-version
 /config/database.yml
+
+jarviis_test
+jarviis_development
