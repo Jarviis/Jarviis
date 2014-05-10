@@ -47,11 +47,20 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
         }
       });
       return defer.promise();
+    },
+    getIssuesEntity: function (data) {
+      var issues = new Jarviis.Entities.IssueCollection();
+      issues.fetch({data: data});
+      return issues;
     }
   }
 
   Jarviis.reqres.setHandler("issue:entity", function(id){
     return API.getIssueEntity(id);
+  });
+
+  Jarviis.reqres.setHandler("issues:entity", function (data) {
+    return API.getIssuesEntity(data);
   });
 });
 
