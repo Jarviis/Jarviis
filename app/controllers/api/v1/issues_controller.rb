@@ -14,9 +14,10 @@ class Api::V1::IssuesController < Api::V1::ApiController
   def create
     @issue = Issue.new(issue_params)
     @issue.state = Issue::OPEN
+    @issue.reporter_id = current_user.id
 
     if @issue.save
-      render json: { status: :created }
+      render json: @issue
     else
       render json: { errors: @issue.errors, status: :unprocessable_entity }
     end
