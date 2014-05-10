@@ -21,9 +21,9 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
       ev.preventDefault();
       var data = Backbone.Syphon.serialize(this);
       if(data) {
-        var newIssue = new Jarviis.Models.Issue(data);
+        var newIssue = new Jarviis.Entities.Issue(data);
         newIssue.save();
-        Jarviis.b.issues.push(newIssue)
+        Jarviis.execute("issue:new", newIssue);
       }
       Jarviis.modal.close();
     },
