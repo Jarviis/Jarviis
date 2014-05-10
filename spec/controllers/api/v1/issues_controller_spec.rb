@@ -23,14 +23,12 @@ describe Api::V1::IssuesController do
 
   describe "POST create" do
     let(:assignee) { FactoryGirl.create(:user) }
-    let(:reporter) { FactoryGirl.create(:user) }
 
     context "with valid params" do
 
       let(:params) do
         { issue: {
             assignee_id: assignee.id,
-            reporter_id: reporter.id,
             name: "Make Jarviis awesome",
             description: "I am a fancy description ftw"
           }
@@ -45,8 +43,10 @@ describe Api::V1::IssuesController do
 
       it "returns status created" do
         post :create, params
+        issue = Issue.where(state: Issue::OPEN).last
+        expected = JSON.parse(IssueSerializer.new(issue).to_json)
 
-        expect(json_response["status"]).to eq("created")
+        expect(json_response).to eq(expected)
       end
 
       it "does not return any errors" do
@@ -60,7 +60,6 @@ describe Api::V1::IssuesController do
       let(:params) do
         { issue: {
             assignee_id: assignee.id,
-            reporter_id: reporter.id,
             name: nil,
             description: "I am a fancy description ftw"
           }
