@@ -17,11 +17,11 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
       due_date: '#due-date',
       description: '#description'
     },
+    users: Jarviis.request('users:entity'),
     initialize: function () {
-      var fetchingUsers = Jarviis.request('users:entity');
+      var fetchingUsers = this.users;
       var self = this;
       $.when(fetchingUsers).done(function(users){
-        console.log(users)
         self.users = users;
         self.render();
       });

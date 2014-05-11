@@ -9,9 +9,10 @@
     <form>
       <div class="form-group"><input type="text" class="form-control" name="name" id="name" placeholder="Issue title" /></div>
       <div class="form-group">
-        <select id="assignee">
+        <select id="assignee" name="assignee_id">
+          <option value="">Choose an Assignee</option>
           {{#each users}}
-          <option value="{{ email }}">{{ name }}</option>
+          <option value="{{ id }}">{{ name }}</option>
           {{/each}}
         </select>
       </div>
