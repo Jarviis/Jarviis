@@ -5,21 +5,26 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
 
   Entities.UserCollection = Backbone.Collection.extend({
     model: Jarviis.Entities.User,
-    url: '/api/'+apiVer+'/users',
-    initialize: function (options) {
-      this.options = options;
-    }
+    url: '/api/'+apiVer+'/users'
   });
 
   var API = {
     getUsersEntity: function (data) {
+      var defer = $.Deferred();
       var users = new Jarviis.Entities.UserCollection();
-      users.fetch({data: data});
-      return users;
+      users.fetch({
+        success: function(data){
+          defer.resolve(data);
+        },
+        error: function(data){
+          defer.resolve(undefined);
+        }
+      });
+      return defer.promise();
     }
   }
 
-  Jarviis.reqres.setHandler("users:entity", function (data) {
-    return API.getUsersEntity(data);
+  Jarviis.reqres.setHandler("users:entity", function () {
+    return API.getUsersEntity();
   });
 });

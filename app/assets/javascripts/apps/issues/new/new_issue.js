@@ -17,6 +17,15 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
       due_date: '#due-date',
       description: '#description'
     },
+    initialize: function () {
+      var fetchingUsers = Jarviis.request('users:entity');
+      var self = this;
+      $.when(fetchingUsers).done(function(users){
+        console.log(users)
+        self.users = users;
+        self.render();
+      });
+    },
     create: function (ev) {
       ev.preventDefault();
       var data = Backbone.Syphon.serialize(this);
@@ -27,6 +36,9 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
         }});
       }
       Jarviis.modal.close();
+    },
+    onRender: function () {
+      this.ui.assignee.chosen({allow_single_deselect: true});
     },
     maximize: function () {
       this.ui.minimized.hide();
@@ -41,5 +53,10 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
     exit: function () {
       Jarviis.modal.close();
     },
+    serializeData: function () {
+      return {
+        users: this.users.toJSON()
+      }
+    }
   });
 });
