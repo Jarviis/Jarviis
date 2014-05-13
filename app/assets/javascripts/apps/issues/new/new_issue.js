@@ -17,9 +17,8 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
       due_date: '#due-date',
       description: '#description'
     },
-    users: Jarviis.request('users:entity'),
     initialize: function () {
-      var fetchingUsers = this.users;
+      var fetchingUsers = Jarviis.request('users:entity');
       var self = this;
       $.when(fetchingUsers).done(function(users){
         self.users = users;
