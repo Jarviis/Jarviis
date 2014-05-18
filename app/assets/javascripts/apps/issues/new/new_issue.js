@@ -53,6 +53,7 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
       Jarviis.modal.close();
     },
     serializeData: function () {
+      var users = this.users.toJSON() || [];
       return {
         users: this.users.toJSON()
       }
