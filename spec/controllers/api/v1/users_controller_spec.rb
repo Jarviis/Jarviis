@@ -10,13 +10,13 @@ describe Api::V1::UsersController do
 
   let(:json_response) { JSON.parse(response.body) }
 
-  describe "#index" do
-    let(:users) { FactoryGirl.create_list(:user, 2) }
-
+  describe "GET index" do
     it "returns all issues" do
       get :index
+      users = User.all
+      expected = JSON.parse(users.map { |u| UserSerializer.new(u) }.to_json)
 
-      expect(response.body).to eq(User.search({}).to_json)
+      expect(json_response).to eq(expected)
     end
   end
 end
