@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jarviis | Admin Dashboard</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,400italic&subset=latin,greek' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag "application", media: "all" %>
+  <%= javascript_include_tag "landing" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <%= render 'layouts/admin_header' %>
+  <%= render 'layouts/alerts' %>
+  <%= yield %>
+</body>
+</html>

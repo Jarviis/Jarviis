@@ -22,6 +22,7 @@ Jarviis::Application.routes.draw do
   end
 
   namespace :admin do
+    resources :dashboard, only: :index
     resources :users, only: [:index, :destroy]
   end
 

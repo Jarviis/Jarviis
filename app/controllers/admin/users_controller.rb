@@ -1,6 +1,6 @@
 class Admin::UsersController < AdminController
   def index
-    @users = User.include(:teams).all
+    @users = User.includes(:teams).all
   end
 
   def destroy
