@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140513142418) do
+ActiveRecord::Schema.define(version: 20140519175827) do
+
+  create_table "forensics", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "action"
+    t.string   "description", limit: 1024
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "issues", force: true do |t|
     t.integer  "state"
