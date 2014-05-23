@@ -29,8 +29,8 @@
         </div>
 
         <div class="form-group">
-          <%= f.select :team_ids, options_for_select(Team.all.map { |t| [t.name, t.id] }),
-            {}, multiple: true, class: "chosen-choices" %>
+          <%= f.label :team_ids, "Teams" %>
+          <%= f.collection_select :team_ids, Team.order(:name), :id, :name, {}, multiple: true, class: "chosen-choices" %>
         </div>
 
         <%= f.submit "Update", class: "create btn btn-primary" %>
