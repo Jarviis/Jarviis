@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Edit user <%= @user.username %></h3>
+      <%= form_for @user, url: { action: "update" } do |f| %>
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :username %>
+          <%= f.text_field :username, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password %>
+          <%= f.password_field :password, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.select :team_ids, options_for_select(Team.all.map { |t| [t.name, t.id] }),
+            {}, multiple: true, class: "chosen-choices" %>
+        </div>
+
+        <%= f.submit "Update", class: "create btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(".chosen-choices").chosen();
+</script>
