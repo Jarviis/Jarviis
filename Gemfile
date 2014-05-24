@@ -37,6 +37,8 @@ gem 'backbone-on-rails'
 
 gem 'handlebars_assets'
 
+gem 'bootstrap-x-editable-rails'
+
 # Officially-supported gem for Backbone Marionette
 gem 'marionette-rails'
 

@@ -19,6 +19,7 @@
 //= require backbone.marionette
 //= require_tree ./vendors
 //= require backbone-syphon
+//= require bootstrap3-editable/bootstrap-editable
 //= require_tree ./common
 //= require dashboard
 //= require_tree ./entities

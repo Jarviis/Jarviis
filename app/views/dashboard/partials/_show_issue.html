@@ -8,11 +8,11 @@
   <div class="col-md-8">
     <div class="panel">
       <div class="panel-heading issue-title">
-        <h3>{{name}}</h3>
+        <h3 data-name="name" class="editable editable-click">{{name}}</h3>
         <span class="label label-primary">{{status}}</span>
       </div>
       <div class="panel-body">
-        <p>{{description}}</p>
+        <p data-type="textarea" data-name="description" class="editable editable-click">{{description}}</p>
         <ul class="nav nav-tabs">
           <li class="active"><a href="#">Comments</a></li>
           <li><a href="#">Workflow</a></li>
@@ -36,23 +36,23 @@
       <button type="button" class="btn btn-default" id="open">Open</button>
       <button type="button" class="btn btn-default" id="close">Close</button>
       <button type="button" class="btn btn-default">Edit</button>
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-        More <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a href="#">Action</a></li>
-        <li><a href="#">Another action</a></li>
-        <li><a href="#">Something else here</a></li>
-        <li class="divider"></li>
-        <li><a href="#">Separated link</a></li>
-      </ul>
+      <!-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> -->
+      <!--   More <span class="caret"></span> -->
+      <!-- </button> -->
+      <!-- <ul class="dropdown-menu" role="menu"> -->
+      <!--   <li><a href="#">Action</a></li> -->
+      <!--   <li><a href="#">Another action</a></li> -->
+      <!--   <li><a href="#">Something else here</a></li> -->
+      <!--   <li class="divider"></li> -->
+      <!--   <li><a href="#">Separated link</a></li> -->
+      <!-- </ul> -->
     </div>
     <table class="table">
       <tbody>
       <tr><td>Type:</td><td>Task</td></tr>
-      <tr><td>Due Date:</td><td>Dec 25th, 2015</td></tr>
-      <tr><td>Assignee:</td><td>Captain Igloo</td></tr>
-      <tr><td>Reporter:</td><td>Dimitris Tsironis</td></tr>
+      <tr><td>Due Date:</td><td>{{date due_date "MMMM Do YYYY"}}</td></tr>
+      <tr><td>Assignee:</td><td>{{ assignee.name }}</td></tr>
+      <tr><td>Reporter:</td><td>{{ reporter.name }}</td></tr>
       <tr><td>Created:</td><td>{{date created_at "MMMM Do YYYY, HH:mm:ss"}}</td></tr>
       <tr><td>Last Updated:</td><td>{{date updated_at "MMMM Do YYYY, HH:mm:ss"}}</td></tr>
       </tbody>

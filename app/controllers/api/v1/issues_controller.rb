@@ -25,7 +25,7 @@ class Api::V1::IssuesController < Api::V1::ApiController
 
   def update
     if @issue.update(issue_params)
-       render json: { status: :updated }
+       render json: @issue
     else
       render json: { errors: @issue.errors, status: :unprocessable_entity }
     end
