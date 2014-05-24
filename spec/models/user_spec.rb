@@ -5,6 +5,8 @@ describe User do
   it { should respond_to(:username) }
   it { should validate_uniqueness_of(:username) }
   it { should validate_presence_of(:username) }
+  it { should have_many(:team_relationships) }
+  it { should have_many(:teams).through(:team_relationships) }
 
   describe "issues associations" do
     let(:assignee) { FactoryGirl.create(:user) }

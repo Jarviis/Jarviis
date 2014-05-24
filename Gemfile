@@ -37,6 +37,8 @@ gem 'backbone-on-rails'
 
 gem 'handlebars_assets'
 
+gem 'bootstrap-x-editable-rails'
+
 # Officially-supported gem for Backbone Marionette
 gem 'marionette-rails'
 
@@ -73,7 +75,7 @@ end
 group :test do
 
   # Test frameworks and helpers
-  gem "shoulda-matchers", "~> 2.1", "!= 2.2.0"
+  gem "shoulda-matchers", "~> 2.6"
   gem "capybara", "~> 2.0.0"
 
   # Fixtures replacement

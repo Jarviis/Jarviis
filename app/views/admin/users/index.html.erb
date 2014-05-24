@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Manage Users on this Jarviis</h3>
+    </div>
+    <div class="panel-body table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <th>User</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Teams</th>
+          <th>Actions</th>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.username %></td>
+              <td><%= user.email %></td>
+              <td><%= user.teams.map(&:name).join(",") %></td>
+              <td>
+                <% if user.id != current_user.id %>
+                  <%= link_to "Destroy", admin_user_path(user.id), method: :delete,
+                    confirm: "Are you sure?", class: "small btn-primary btn-danger"%>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -21,6 +21,16 @@ Jarviis.module("Issues.Show", function(Show, Jarviis, Backbone, Marionette, $, _
     },
     closeIssue: function() {
       this.model.close();
+    },
+    onRender: function () {
+      var self = this;
+      this.$(".editable").editable({
+        mode: "inline",
+        type: 'text',
+        success: function(response, newValue) {
+          self.model.save($(this).data('name'), newValue); //update backbone model
+        }
+      })
     }
   });
 });
