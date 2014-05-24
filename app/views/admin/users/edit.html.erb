@@ -30,7 +30,7 @@
 
         <div class="form-group">
           <%= f.label :team_ids, "Teams" %>
-          <%= f.collection_select :team_ids, Team.order(:name), :id, :name, {}, multiple: true, class: "chosen-choices" %>
+          <%= f.collection_select :team_ids, Team.order(:name), :id, :name, {}, multiple: true, class: "form-control chosen-choices" %>
         </div>
 
         <%= f.submit "Update", class: "create btn btn-primary" %>
@@ -40,5 +40,10 @@
 </div>
 
 <script>
+$(document).ready(function () {
   $(".chosen-choices").chosen();
+  $(".chosen-choices").addClass('form-control');
+  $("input.default").css('height', "28px");
+
+});
 </script>
