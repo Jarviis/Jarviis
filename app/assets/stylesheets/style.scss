@@ -33,6 +33,10 @@ main#landing {
 
 #assigned, #reported {
   padding: 0;
+  .no-issue td {
+    text-align: center;
+    color: #777;
+  }
 }
 
 #assignee_chosen {

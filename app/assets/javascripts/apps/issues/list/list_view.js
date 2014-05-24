@@ -22,7 +22,9 @@ Jarviis.module("Issues.List", function(List, Jarviis, Backbone, Marionette, $, _
   });
 
   var NoIssueView = Backbone.Marionette.ItemView.extend({
-    template: _.template('<p>Hooray! You have no open issues!</p>')
+    tagName: "tr",
+    className: "no-issue",
+    template: _.template('<td colspan="2">Hooray! You have no open issues!</td>')
   });
 
   List.Issues = Marionette.CompositeView.extend({
