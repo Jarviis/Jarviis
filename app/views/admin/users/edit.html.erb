@@ -29,6 +29,11 @@
         </div>
 
         <div class="form-group">
+          <%= f.label :admin %>
+          <%= f.check_box :admin %>
+        </div>
+
+        <div class="form-group">
           <%= f.label :team_ids, "Teams" %>
           <%= f.collection_select :team_ids, Team.order(:name), :id, :name, {}, multiple: true, class: "form-control chosen-choices" %>
         </div>
@@ -44,6 +49,5 @@ $(document).ready(function () {
   $(".chosen-choices").chosen();
   $(".chosen-choices").addClass('form-control');
   $("input.default").css('height', "28px");
-
 });
 </script>

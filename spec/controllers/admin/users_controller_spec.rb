@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Admin::UsersController do
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryGirl.create(:user, admin: true)
     sign_in @user
     request.env["HTTP_REFERER"] = "http://google.com"
   end
