@@ -47,7 +47,7 @@ class Admin::UsersController < AdminController
 
   def user_params
     params.require(:user).permit(:name, :username, :password, :password_confirmation,
-                                 team_ids: [])
+                                 :admin, team_ids: [])
   end
 
   def password_given?
