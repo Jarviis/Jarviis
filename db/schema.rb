@@ -16,6 +16,15 @@ ActiveRecord::Schema.define(version: 20141026155737) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "attachments", force: true do |t|
+    t.integer  "issue_id"
+    t.string   "filename"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "attachments", ["issue_id"], name: "index_attachments_on_issue_id", using: :btree
+
   create_table "comments", force: true do |t|
     t.string   "title",            limit: 50, default: ""
     t.text     "comment"
