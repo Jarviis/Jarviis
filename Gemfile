@@ -30,6 +30,9 @@ gem 'acts_as_commentable'
 # Pagination
 gem 'kaminari'
 
+# Acts as tree
+gem 'acts_as_tree', '~> 1.6.0'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
