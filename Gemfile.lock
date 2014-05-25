@@ -53,6 +53,11 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 1.0.0)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
     celluloid (0.15.2)
       timers (~> 1.1.0)
     celluloid-io (0.15.0)
@@ -268,6 +273,7 @@ DEPENDENCIES
   bootstrap-x-editable-rails
   capistrano
   capybara (~> 2.0.0)
+  carrierwave (= 0.10.0)
   database_cleaner (~> 0.8.0)
   devise
   elasticsearch-model

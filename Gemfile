@@ -27,6 +27,9 @@ gem 'elasticsearch-rails'
 # Comments
 gem 'acts_as_commentable'
 
+# Attachments
+gem 'carrierwave', '0.10.0'
+
 # Pagination
 gem 'kaminari'
 
