@@ -3,8 +3,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
 
-ruby '2.1.0'
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
 
@@ -20,7 +18,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'devise'
 
 # ElasticSearch
-gem 'tire'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 # Pagination
 gem 'kaminari'

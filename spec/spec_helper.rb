@@ -13,8 +13,10 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 # Maintain the test schema
 ActiveRecord::Migration.maintain_test_schema!
 
+Issue.__elasticsearch__.create_index! force: true
+User.__elasticsearch__.create_index! force: true
+
 RSpec.configure do |config|
-  config.after(:all) { delete_indexes }
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
@@ -43,9 +45,4 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include Devise::TestHelpers, type: :controller
-end
-
-def delete_indexes
-  Issue.index.delete
-  User.index.delete
 end

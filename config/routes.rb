@@ -9,6 +9,10 @@ Jarviis::Application.routes.draw do
           post :wontfix
           post :open
         end
+
+        collection do
+          get :search
+        end
       end
 
       resources :users, only: :index do
