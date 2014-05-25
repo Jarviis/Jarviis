@@ -1,5 +1,8 @@
 class Issue < ActiveRecord::Base
   include Searchable::Issue
+  extend  ActsAsTree::Presentation
+
+  acts_as_tree
 
   OPEN = 0
   RESOLVED = 1
