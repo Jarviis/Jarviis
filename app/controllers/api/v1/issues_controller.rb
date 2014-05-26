@@ -54,19 +54,11 @@ class Api::V1::IssuesController < Api::V1::ApiController
   end
 
   def resolve
-    if @issue.resolve!
-      render json: { status: :resolved }
-    else
-      render json: { errors: "Issue##{@issue.id} was not open", status: :unprocessable_entity }
-    end
+    resolve_issue(!!@issue.resolve!)
   end
 
   def close
-    if @issue.close!
-      render json: { status: :closed }
-    else
-      render json: { errors: "Issue##{@issue.id} was not open", status: :unprocessable_entity }
-    end
+    close_issue(!!@issue.close!)
   end
 
   def wontfix
@@ -76,11 +68,7 @@ class Api::V1::IssuesController < Api::V1::ApiController
   end
 
   def open
-    if @issue.open!
-      render json: { status: :open }
-    else
-      render json: { errors: "Issue##{@issue.id} was already open", status: :unprocessable_entity }
-    end
+    open_issue(!!@issue.open!)
   end
 
   private
@@ -93,5 +81,25 @@ class Api::V1::IssuesController < Api::V1::ApiController
     params.require(:issue).permit(:state, :name,
       :description, :assignee_id, :reporter_id, :due_date,
       :parent_id)
+  end
+
+  def method_missing(method, *args)
+    if method.match(/^(resolve|close|open)_issue$/)
+      if args.first
+        status = method.to_s.gsub("_issue", "")
+        status << "d" if status != "open"
+        status = status.to_sym
+      else
+        errors = "Something was wrong with the state transition you requested"
+      end
+
+      if status
+        render json: { status: status }
+      else
+        render json: { errors: errors, status: :unprocessable_entity }
+      end
+    else
+      super(args)
+    end
   end
 end
