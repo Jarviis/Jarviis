@@ -37,6 +37,16 @@ class Issue < ActiveRecord::Base
     as_json(methods: [:assignee_name, :assignee_username, :reporter_username, :reporter_name])
   end
 
+  # @return [Boolean] True if it has at least one descendant
+  def has_descendants?
+    self.descendants.count > 0
+  end
+
+  # @return [Boolean] True if it has parent_id set
+  def has_parent?
+    !!self.parent_id
+  end
+
   # @return [String] The name of the assignee, Nobody if there is no assignee
   def assignee_name
     assignee.present? ? assignee.name : "Nobody"
