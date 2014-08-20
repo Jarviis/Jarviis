@@ -13,6 +13,8 @@ class Issue < ActiveRecord::Base
     WONTFIX => "wontfix"
   }
 
+  acts_as_commentable
+
   index_name "issues_#{Rails.env}"
 
   paginates_per 15
