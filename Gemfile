@@ -24,6 +24,9 @@ gem 'pg'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 
+# Comments
+gem 'acts_as_commentable'
+
 # Pagination
 gem 'kaminari'
 
