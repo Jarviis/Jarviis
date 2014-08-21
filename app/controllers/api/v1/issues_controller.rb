@@ -1,6 +1,7 @@
 class Api::V1::IssuesController < Api::V1::ApiController
   before_action :set_issue, only: [:show, :edit, :update, :destroy,
-                                   :resolve, :close, :wontfix, :open]
+                                   :resolve, :close, :wontfix, :open,
+                                   :comments]
 
   def index
     @issues = Issue.page(params[:page] || 1)
@@ -69,6 +70,10 @@ class Api::V1::IssuesController < Api::V1::ApiController
 
   def open
     open_issue(!!@issue.open!)
+  end
+
+  def comments
+    render json: @issue.comments
   end
 
   private

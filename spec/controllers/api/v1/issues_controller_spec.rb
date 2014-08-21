@@ -275,4 +275,20 @@ describe Api::V1::IssuesController do
       end
     end
   end
+
+  describe "GET comments" do
+    let(:reporter) { FactoryGirl.create(:user) }
+    let!(:issue) { FactoryGirl.create(:issue, reporter_id: reporter.id) }
+    let!(:comments) do
+      FactoryGirl.create_list(:comment, 2,
+                              user_id: @user.id,
+                              commentable_id: issue.id)
+    end
+
+    it "reponds with a json with all the comments of the issue" do
+      get :comments, id: issue.id
+
+      expect(response.body).to eq(issue.comments.to_json)
+    end
+  end
 end
