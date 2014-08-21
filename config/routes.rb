@@ -21,6 +21,8 @@ Jarviis::Application.routes.draw do
         end
       end
 
+      resources :comments, only: [:create, :destroy]
+
       resources :teams, only: [:index, :show]
     end
   end
