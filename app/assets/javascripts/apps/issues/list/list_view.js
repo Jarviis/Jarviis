@@ -4,6 +4,7 @@ Jarviis.module("Issues.List", function(List, Jarviis, Backbone, Marionette, $, _
     regions: {
       assigned: "#assigned",
       reported: "#reported",
+      comments: "#comments"
     }
   });
 
