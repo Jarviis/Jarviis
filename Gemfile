@@ -17,6 +17,9 @@ gem 'uglifier', '>= 1.3.0'
 # Authentication
 gem 'devise'
 
+# PostgreSQL
+gem 'pg'
+
 # ElasticSearch
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
@@ -50,7 +53,6 @@ end
 
 group :production do
   gem 'unicorn'
-  gem 'pg'
 end
 
 group :development do
@@ -58,15 +60,12 @@ group :development do
 end
 
 group :development, :test do
-  gem 'sqlite3'
-  gem 'debugger'
-
   gem "guard-rspec", '~> 2.2.1', :require => nil
   gem "guard-spork", '~> 1.4.2', :require => nil
 
   # Pry REPL and friends
   gem 'pry-rails'
-  gem 'pry-debugger'
+  gem 'pry-byebug'
 
   gem "rspec-rails"
 end

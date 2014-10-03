@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140524162922) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "forensics", force: true do |t|
     t.integer  "user_id"
     t.integer  "action"
@@ -33,9 +36,9 @@ ActiveRecord::Schema.define(version: 20140524162922) do
     t.datetime "updated_at"
   end
 
-  add_index "issues", ["assignee_id"], name: "index_issues_on_assignee_id"
-  add_index "issues", ["parent_id"], name: "index_issues_on_parent_id"
-  add_index "issues", ["reporter_id"], name: "index_issues_on_reporter_id"
+  add_index "issues", ["assignee_id"], name: "index_issues_on_assignee_id", using: :btree
+  add_index "issues", ["parent_id"], name: "index_issues_on_parent_id", using: :btree
+  add_index "issues", ["reporter_id"], name: "index_issues_on_reporter_id", using: :btree
 
   create_table "team_relationships", force: true do |t|
     t.integer  "user_id"
@@ -44,8 +47,8 @@ ActiveRecord::Schema.define(version: 20140524162922) do
     t.datetime "updated_at"
   end
 
-  add_index "team_relationships", ["team_id"], name: "index_team_relationships_on_team_id"
-  add_index "team_relationships", ["user_id"], name: "index_team_relationships_on_user_id"
+  add_index "team_relationships", ["team_id"], name: "index_team_relationships_on_team_id", using: :btree
+  add_index "team_relationships", ["user_id"], name: "index_team_relationships_on_user_id", using: :btree
 
   create_table "teams", force: true do |t|
     t.string   "name"
@@ -71,7 +74,7 @@ ActiveRecord::Schema.define(version: 20140524162922) do
     t.boolean  "admin",                  default: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
