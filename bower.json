@@ -1,0 +1,10 @@
+{
+  "name": "jarviis",
+  "dependencies": {
+    "lodash": "~2.4.1",
+    "jquery": "~2.1.1",
+    "backbone": "~1.1.2",
+    "marionette": "~2.2.0",
+    "marionette.backbone.syphon": "~0.5.0"
+  }
+}

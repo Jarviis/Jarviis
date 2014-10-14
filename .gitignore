@@ -20,3 +20,6 @@
 
 jarviis_test
 jarviis_development
+
+# bower
+/app/assets/components

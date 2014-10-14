@@ -1,5 +1,5 @@
 Jarviis.module("Issues.Show", function(Show, Jarviis, Backbone, Marionette, $, _){
-  Show.Layout = Marionette.Layout.extend({
+  Show.Layout = Marionette.LayoutView.extend({
     template: "#show-issue-template",
     regions: {
       comments: "#comments"

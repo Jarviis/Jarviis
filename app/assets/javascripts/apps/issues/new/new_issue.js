@@ -34,7 +34,7 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
           Jarviis.execute("issues:new", model);
         }});
       }
-      Jarviis.modal.close();
+      Jarviis.modal.destroy();
     },
     onRender: function () {
       this.ui.assignee.chosen({allow_single_deselect: true});
@@ -50,7 +50,7 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
       });
     },
     exit: function () {
-      Jarviis.modal.close();
+      Jarviis.modal.destroy();
     },
     serializeData: function () {
       var users = this.users ? this.users.toJSON() : [];

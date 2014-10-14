@@ -1,5 +1,5 @@
 Jarviis.module("Issues.List", function(List, Jarviis, Backbone, Marionette, $, _){
-  List.Layout = Marionette.Layout.extend({
+  List.Layout = Marionette.LayoutView.extend({
     template: "#issues-template",
     regions: {
       assigned: "#assigned",
@@ -32,8 +32,8 @@ Jarviis.module("Issues.List", function(List, Jarviis, Backbone, Marionette, $, _
     tagName: 'table',
     className: 'table table-striped table-hover', /* Bootstrap class for tables */
     template: "#list-issues-template",
-    itemViewContainer: "tbody",
-    itemView: List.Issue,
+    childViewContainer: "tbody",
+    childView: List.Issue,
     emptyView: NoIssueView
   });
 

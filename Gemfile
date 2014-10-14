@@ -33,22 +33,11 @@ gem 'kaminari'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-
 gem 'active_model_serializers'
-
-gem 'backbone-on-rails'
 
 gem 'handlebars_assets'
 
 gem 'bootstrap-x-editable-rails'
-
-# Officially-supported gem for Backbone Marionette
-gem 'marionette-rails'
-
-# Form serializer for Backbone
-gem 'backbone-syphon-rails'
 
 group :doc do
   gem 'yard', require: false

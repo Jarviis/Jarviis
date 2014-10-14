@@ -8,6 +8,6 @@ Jarviis.module("Comments.List", function(List, Jarviis, Backbone, Marionette, $,
   List.Comments = Marionette.CollectionView.extend({
     tagName: 'ul',
     className: 'list-group',
-    itemView: List.Comment
+    childView: List.Comment
   });
 });
