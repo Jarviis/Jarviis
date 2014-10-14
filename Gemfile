@@ -35,8 +35,6 @@ gem 'therubyracer', platforms: :ruby
 
 gem 'active_model_serializers'
 
-gem 'handlebars_assets'
-
 gem 'bootstrap-x-editable-rails'
 
 group :doc do

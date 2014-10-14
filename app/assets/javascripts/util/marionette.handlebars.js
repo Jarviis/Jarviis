@@ -26,12 +26,12 @@
 	Marionette.TemplateCache.prototype.loadTemplate = function(templateId) {
 		var template, templateUrl;
 		try {
-			template = Marionette.$(templateId).html();
+			template = $(templateId).html();
 		}
 		catch (e) {}
 		if (!template || template.length === 0) {
 			templateUrl = Marionette.Handlebars.path + templateId + Marionette.Handlebars.extension;
-			Marionette.$.ajax({
+			$.ajax({
 				url: templateUrl,
 				success: function(data) {
 					template = data;

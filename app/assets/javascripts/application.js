@@ -11,12 +11,16 @@
 // about supported directives.
 //
 //= require jquery
-//= require underscore
+//= require lodash
 //= require bootstrap
 //= require handlebars
 //= require backbone
+//= require backbone.wreqr
+//= require backbone.babysitter
 //= require marionette
-//= require_tree ./vendors
+//= require moment
+//= require chosen/chosen.jquery
+//= require_tree ./util
 //= require marionette.backbone.syphon
 //= require bootstrap3-editable/bootstrap-editable
 //= require_tree ./common
