@@ -28,6 +28,7 @@ Jarviis.module("Comments.List", function(List, Jarviis, Backbone, Marionette, $,
       };
 
       this.collection.create(data);
+      this.$('#comment-entry').text('');
     }
   });
 });

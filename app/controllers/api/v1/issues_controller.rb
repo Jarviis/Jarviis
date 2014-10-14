@@ -73,7 +73,7 @@ class Api::V1::IssuesController < Api::V1::ApiController
   end
 
   def comments
-    render json: { comments: @issue.comments, issue_id: @issue.id }
+    render json: @issue.comments
   end
 
   private
