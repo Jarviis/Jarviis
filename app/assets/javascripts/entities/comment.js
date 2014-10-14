@@ -1,24 +1,34 @@
 Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, _){
-  Entities.Comment = Backbone.Model.extend({});
+  Entities.Comment = Backbone.Model.extend({
+    url: "/api/v1/comments"
+  });
 
   Entities.CommentCollection = Backbone.Collection.extend({
+    model: Entities.Comment,
     initialize: function(options) {
       this.issue_id = options.issue_id
     },
 
     url: function() {
       return '/api/v1/issues/' + this.issue_id + '/comments';
-    },
-
-    parse: function(data) {
-      return data;
     }
+
   });
 
   var API = {
     getCommentEntity: function(issue_id) {
       var comments = new Jarviis.Entities.CommentCollection({"issue_id": issue_id})
-      return comments.fetch();
+
+      var defer = $.Deferred();
+      comments.fetch({
+        success: function(data){
+          defer.resolve(data);
+        },
+        error: function(data){
+          defer.resolve(undefined);
+        }
+      });
+      return defer.promise();
     }
   };
 

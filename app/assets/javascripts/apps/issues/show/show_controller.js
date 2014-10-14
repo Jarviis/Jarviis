@@ -2,11 +2,11 @@ Jarviis.module("Issues.Show", function(Show, Jarviis, Backbone, Marionette, $, _
   Show.Controller = {
     showIssue: function(id) {
       var fetchingIssue = Jarviis.request("issue:entity", id);
-      Jarviis.layout = new Jarviis.Issues.Show.Layout();
-      Jarviis.main.show(Jarviis.layout);
-      Jarviis.Comments.List.Controller(id);
+      var fetchingComments = Jarviis.request("comment:entity", id);
 
-      $.when(fetchingIssue).done(function(issue){
+      Jarviis.main.show(Jarviis.layout);
+
+      $.when(fetchingIssue, fetchingComments).done(function(issue, comments){
         var issueView;
         if(issue !== undefined){
           issueView = new Show.Issue({
@@ -21,7 +21,12 @@ Jarviis.module("Issues.Show", function(Show, Jarviis, Backbone, Marionette, $, _
         }
 
         Jarviis.main.show(issueView);
+        Jarviis.addRegions({
+          comments: "#comments"
+        });
+        Jarviis.comments.show(new Jarviis.Comments.List.Comments({ collection: comments }))
       });
     }
   }
 });
+
