@@ -95,3 +95,7 @@ RSpec.configure do |config|
 
   config.include Devise::TestHelpers, type: :controller
 end
+
+def token_header(token)
+   ActionController::HttpAuthentication::Token.encode_credentials(token)
+end
