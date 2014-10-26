@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   include Searchable::User
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  before_save :set_auth_token
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -15,4 +15,20 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :username
   validates_presence_of   :username
+
+  # Sets the aauthentication token to a SecureRandom without updating the
+  # record to the database.
+  def set_auth_token
+    return if self.authentication_token.present?
+    self.authentication_token = generate_auth_token
+  end
+
+  private
+
+  def generate_auth_token
+    loop do
+      token = SecureRandom.hex
+      break token unless self.class.exists?(authentication_token: token)
+    end
+  end
 end
