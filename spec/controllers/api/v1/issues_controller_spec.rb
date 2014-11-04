@@ -7,7 +7,8 @@ describe Api::V1::IssuesController do
 
   before(:each) do
     @user = FactoryGirl.create(:user)
-    sign_in @user
+
+    @request.headers["Authorization"] = token_header(@user.authentication_token)
   end
 
   describe "GET index" do
@@ -15,7 +16,7 @@ describe Api::V1::IssuesController do
     let!(:issues) { FactoryGirl.create_list(:issue, 2, reporter_id: reporter.id) }
 
     it "returns all issues" do
-      get :index
+      get :index, {}
 
       expected = JSON.parse(issues.map{ |i| IssueSerializer.new(i) }.to_json)
 
