@@ -4,7 +4,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
   def create
     issue = Issue.find(params[:issue_id])
     comment = issue.comments.new(comment_params)
-    comment.user_id = current_user.id
+    comment.user_id = @api_user.id
 
 
     if comment.save
@@ -15,7 +15,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
   end
 
   def destroy
-    if @comment.user_id == current_user.id
+    if @comment.user_id == @api_user.id
       @comment.destroy
       render json: { status: :destroyed }
     else
