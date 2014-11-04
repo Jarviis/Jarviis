@@ -5,7 +5,8 @@ describe Api::V1::TeamsController do
 
   before(:each) do
     @user = FactoryGirl.create(:user)
-    sign_in @user
+
+    @request.headers["Authorization"] = token_header(@user.authentication_token)
   end
 
   describe "GET index" do
