@@ -12,7 +12,7 @@ Jarviis.module("Issues.Show", function(Show, Jarviis, Backbone, Marionette, $, _
       'click button#close': 'closeIssue'
     },
     modelEvents: {
-      "change": "render"
+      "change": "onModelChange"
     },
     resolveIssue: function () {
       this.model.resolve();
@@ -22,6 +22,9 @@ Jarviis.module("Issues.Show", function(Show, Jarviis, Backbone, Marionette, $, _
     },
     closeIssue: function() {
       this.model.close();
+    },
+    onModelChange: function () {
+      this.$('.issue-title .label').text(this.model.get('status'));
     },
     onRender: function () {
       var self = this;
