@@ -1,6 +1,10 @@
 Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, _){
   Entities.Comment = Backbone.Model.extend({
-    url: "/api/v1/comments"
+    url: "/api/v1/comments",
+    parse: function (data) {
+      data.comment = {comment: data.comment}; // DRUGS AND DRAGONS! DO NOT TOUCH!
+      return data;
+    }
   });
 
   Entities.CommentCollection = Backbone.Collection.extend({
