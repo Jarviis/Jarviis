@@ -22,13 +22,18 @@ Jarviis.module("Comments.List", function(List, Jarviis, Backbone, Marionette, $,
       "click #save-comment": "saveComment"
     },
     saveComment: function () {
-      var data = {
-        comment: Backbone.Syphon.serialize(this),
-        issue_id: this.collection.issue_id
-      };
+      var data,
+          value = Backbone.Syphone.serialize(this);
 
-      this.collection.create(data);
-      this.$('#comment-entry').val('');
+      if (value.comment) {
+        data = {
+          comment: value,
+          issue_id: this.collection.issue_id
+        };
+
+        this.collection.create(data);
+        this.$('#comment-entry').val('');
+      }
     }
   });
 });
