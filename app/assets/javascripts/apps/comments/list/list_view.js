@@ -23,7 +23,7 @@ Jarviis.module("Comments.List", function(List, Jarviis, Backbone, Marionette, $,
     },
     saveComment: function () {
       var data,
-          value = Backbone.Syphone.serialize(this);
+          value = Backbone.Syphon.serialize(this);
 
       if (value.comment) {
         data = {
