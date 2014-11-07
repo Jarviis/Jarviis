@@ -8,6 +8,7 @@ Jarviis::Application.routes.draw do
           post :close
           post :wontfix
           post :open
+          get  :comments
         end
 
         collection do
@@ -20,6 +21,8 @@ Jarviis::Application.routes.draw do
           get :search
         end
       end
+
+      resources :comments, only: [:create, :destroy]
 
       resources :teams, only: [:index, :show]
     end

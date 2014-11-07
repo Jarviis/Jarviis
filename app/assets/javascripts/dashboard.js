@@ -24,7 +24,7 @@ Jarviis.getCurrentRoute = function(){
   return Backbone.history.fragment
 };
 
-Jarviis.on("initialize:after", function(){
+Jarviis.on("start", function(){
   Jarviis.header.attachView(new Jarviis.Header.View({el: $(".navbar")}));
   if(Backbone.history){
     Backbone.history.start({pushState: true});
