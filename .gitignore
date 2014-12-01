@@ -18,6 +18,9 @@
 .ruby-version
 /config/database.yml
 
+# Ignore all test coverage generated files
+/coverage
+
 jarviis_test
 jarviis_development
 
