@@ -27,7 +27,7 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
   Entities.IssueCollection = Backbone.Collection.extend({
     model: Jarviis.Entities.Issue,
     url: function() {
-      return '/api/v1/issues';
+      return '/api/'+apiVer+'/issues';
     },
     initialize: function (options) {
       this.options = options;
