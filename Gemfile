@@ -30,6 +30,8 @@ gem 'acts_as_commentable'
 # Attachments
 gem 'carrierwave', '0.10.0'
 
+gem 'mini_magick'
+
 # Pagination
 gem 'kaminari'
 
