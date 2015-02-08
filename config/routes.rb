@@ -2,6 +2,8 @@ Jarviis::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resource :attachments, only: :destroy
+
       resources :issues do
         member do
           post :resolve
@@ -9,6 +11,8 @@ Jarviis::Application.routes.draw do
           post :wontfix
           post :open
           get  :comments
+
+          resources :attachments, only: :create
         end
 
         collection do
