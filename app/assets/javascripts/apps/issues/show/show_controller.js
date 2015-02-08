@@ -1,13 +1,24 @@
 Jarviis.module("Issues.Show", function(Show, Jarviis, Backbone, Marionette, $, _){
   Show.Controller = {
     showIssue: function(id) {
-      var fetchingIssue = Jarviis.request("issue:entity", id);
-      var fetchingComments = Jarviis.request("comment:entity", id);
+      var fetchingIssue = Jarviis.request("issue:entity", id),
+          fetchingComments = Jarviis.request("comment:entity", id),
+          layout = new Jarviis.Issues.Show.Layout();
 
-      Jarviis.main.show(Jarviis.layout);
+      Jarviis.mainRegion.show(layout);
 
       $.when(fetchingIssue, fetchingComments).done(function(issue, comments){
-        var issueView;
+        var breadcrumbs = new Backbone.Collection([
+              {step: "Product"},
+              {step: "Milestone 2"},
+              {step: "Sprint 8"},
+              {step: "Ticket #2"}
+            ]),
+            issueView,
+            breadcrumbsView = new Show.Breadcrumbs({
+              collection: breadcrumbs
+            });
+
         if(issue !== undefined){
           issueView = new Show.Issue({
             model: issue
@@ -20,11 +31,12 @@ Jarviis.module("Issues.Show", function(Show, Jarviis, Backbone, Marionette, $, _
           issueView = new Show.MissingIssue();
         }
 
-        Jarviis.main.show(issueView);
-        Jarviis.addRegions({
-          comments: "#comments"
-        });
-        Jarviis.comments.show(new Jarviis.Comments.List.Comments({ collection: comments }))
+        Jarviis.mainRegion.show(layout);
+        layout.breadcrumbs.show(breadcrumbsView);
+        layout.details.show(issueView);
+        layout.comments.show(new Jarviis.Comments.List.Comments({
+          collection: comments
+        }))
       });
     }
   }

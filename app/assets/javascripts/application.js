@@ -23,7 +23,7 @@
 //= require_tree ./util
 //= require marionette.backbone.syphon
 //= require bootstrap3-editable/bootstrap-editable
-//= require_tree ./common
+//= require_tree ./shared
 //= require dashboard
 //= require_tree ./entities
 //= require_tree ./apps

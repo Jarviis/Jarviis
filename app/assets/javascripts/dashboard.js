@@ -1,32 +1,39 @@
-var apiVer = 'v1';
+(function() {
+  var JarviisApp = Marionette.Application.extend({
+    initialize: function () {
+      this.addRegions({
+        mainRegion: '#main',
+        headerRegion: '#nav',
+        modalRegion: Marionette.Region.Modal.extend({el: '#modal'})
+      });
+    },
 
-Jarviis = new Backbone.Marionette.Application();
+    states: function () {
+      return [
+        'Open',
+        'Resolved',
+        'Closed',
+        'Wontfix'
+      ];
+    },
 
-Jarviis.states = [
-  'Open',
-  'Resolved',
-  'Closed',
-  'Wontfix'
-];
+    navigate: function(route, options){
+      options || (options = {});
+      Backbone.history.navigate(route, options);
+    },
 
-Jarviis.addRegions({
-  header: '#nav',
-  main: '#main',
-  modal: Marionette.Region.Modal.extend({el: '#modal'})
-});
+    currentRoute: function(){
+      return Backbone.history.fragment
+    }
+  });
 
-Jarviis.navigate = function(route, options){
-  options || (options = {});
-  Backbone.history.navigate(route, options);
-};
+  window.apiVer = 'v1';
+  window.Jarviis = new JarviisApp();
 
-Jarviis.getCurrentRoute = function(){
-  return Backbone.history.fragment
-};
-
-Jarviis.on("start", function(){
-  Jarviis.header.attachView(new Jarviis.Header.View({el: $(".navbar")}));
-  if(Backbone.history){
-    Backbone.history.start({pushState: true});
-  }
-});
+  Jarviis.on('start', function(){
+    Jarviis.headerRegion.attachView(new Jarviis.Header.View({el: $(".navbar")}));
+    if(Backbone.history){
+      Backbone.history.start({pushState: true});
+    }
+  });
+})();

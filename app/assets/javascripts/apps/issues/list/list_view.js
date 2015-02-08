@@ -1,4 +1,5 @@
 Jarviis.module("Issues.List", function(List, Jarviis, Backbone, Marionette, $, _){
+
   List.Layout = Marionette.LayoutView.extend({
     template: "#issues-template",
     regions: {
@@ -10,13 +11,17 @@ Jarviis.module("Issues.List", function(List, Jarviis, Backbone, Marionette, $, _
 
   List.Issue = Marionette.ItemView.extend({
     tagName: 'tr',
-    template: _.template("<td><a href='#<%-id%>'><%-name%></a></td><td><%-state%></td>"),
+    template: _.template("<td><a href='#<%- id %>'><%- name %></a></td><td><%- state %></td>"),
+
     events: {
       'click a': 'navigate'
     },
+
     navigate: function(e) {
-      e.preventDefault();
       var id = this.model.id;
+
+      e.preventDefault();
+
       Jarviis.navigate('issues/'+id);
       Jarviis.Issues.Show.Controller.showIssue(id);
     }
