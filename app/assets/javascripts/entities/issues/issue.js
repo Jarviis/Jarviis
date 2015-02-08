@@ -1,10 +1,17 @@
 Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, _){
 
+  var states = [
+    'Open',
+    'Resolved',
+    'Closed',
+    'Wontfix'
+  ];
+
   Entities.Issue = Backbone.Model.extend({
     urlRoot: '/api/'+apiVer+'/issues',
 
     parse: function(data) {
-      data.status = Jarviis.states[data.state];
+      data.status = states[data.state];
       return data;
     },
 

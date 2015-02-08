@@ -33,7 +33,7 @@ Jarviis.module("Issues.Show", function(Show, Jarviis, Backbone, Marionette, $, _
       this.model.close();
     },
     onModelChange: function () {
-      this.$('.issue-title .label').text(this.model.get('status'));
+      this.render();
     },
     onRender: function () {
       var self = this;
