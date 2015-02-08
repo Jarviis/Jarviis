@@ -1,27 +1,30 @@
 <% if !user_signed_in? %>
   <%= render "pages/home" %>
 <% else %>
-<div id="main">
-</div>
-<script id="issues-template" type="text/x-handlebars-template">
-  <%= render 'dashboard/partials/issues_template' %>
-</script>
-<script id="show-issue-template" type="text/x-handlebars-template">
-  <%= render 'dashboard/partials/show_issue' %>
-</script>
-<script id="issue-details-template" type="text/x-handlebars-template">
-  <%= render 'dashboard/partials/issue_details' %>
-</script>
-<script id="list-issues-template" type="text/x-handlebars-template">
-  <%= render 'dashboard/partials/list_issues' %>
-</script>
-<script id="missing-issue-template" type="text/x-handlebars-template">
-  <%= render 'dashboard/partials/missing_issue' %>
-</script>
-<script id="comment-template" type="text/x-handlebars-template">
-  <%= render 'dashboard/partials/comment' %>
-</script>
-<script id="comments-template" type="text/x-handlebars-template">
-  <%= render 'dashboard/partials/comments' %>
-</script>
+  <div id="main">
+  </div>
+  <script type="text/javascript" charset="utf-8">
+  window.CURRENT_USER = "<%= current_user.id %>";
+  </script>
+  <script id="issues-template" type="text/x-handlebars-template">
+    <%= render 'dashboard/partials/issues_template' %>
+  </script>
+  <script id="show-issue-template" type="text/x-handlebars-template">
+    <%= render 'dashboard/partials/show_issue' %>
+  </script>
+  <script id="issue-details-template" type="text/x-handlebars-template">
+    <%= render 'dashboard/partials/issue_details' %>
+  </script>
+  <script id="list-issues-template" type="text/x-handlebars-template">
+    <%= render 'dashboard/partials/list_issues' %>
+  </script>
+  <script id="missing-issue-template" type="text/x-handlebars-template">
+    <%= render 'dashboard/partials/missing_issue' %>
+  </script>
+  <script id="comment-template" type="text/x-handlebars-template">
+    <%= render 'dashboard/partials/comment' %>
+  </script>
+  <script id="comments-template" type="text/x-handlebars-template">
+    <%= render 'dashboard/partials/comments' %>
+  </script>
 <% end %>

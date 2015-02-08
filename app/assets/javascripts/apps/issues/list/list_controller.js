@@ -21,6 +21,9 @@ Jarviis.module("Issues.List", function(List, Jarviis, Backbone, Marionette, $, _
   };
 
   Jarviis.commands.setHandler("issues:new", function(model, data) {
+    if (data.assignee_id == CURRENT_USER) {
+      assigned_issues.add(model);
+    }
     reported_issues.add(model);
   });
 
