@@ -56,7 +56,7 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
 
       return defer.promise();
     }
-  }
+  };
 
   Jarviis.reqres.setHandler("issues:entity", function (data) {
     return API.getIssuesEntity(data);

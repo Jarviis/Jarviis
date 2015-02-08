@@ -31,7 +31,7 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
       if(data) {
         var newIssue = new Jarviis.Entities.Issue();
         newIssue.save(data, {success: function (model) {
-          Jarviis.execute("issues:new", model);
+          Jarviis.execute("issues:new", model, data);
         }});
       }
       this.exit();
@@ -56,7 +56,7 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
       var users = this.users ? this.users.toJSON() : [];
       return {
         users: users
-      }
+      };
     }
   });
 });

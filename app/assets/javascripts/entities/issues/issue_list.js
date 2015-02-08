@@ -12,7 +12,7 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
 
   var API = {
     getIssueEntity: function(issueId){
-      var issue = new Entities.Issue({id: issueId});
+      var issue = new Entities.Issue({id: issueId}),
           defer = $.Deferred();
 
       issue.fetch({

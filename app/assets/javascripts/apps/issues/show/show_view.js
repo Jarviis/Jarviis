@@ -43,7 +43,7 @@ Jarviis.module("Issues.Show", function(Show, Jarviis, Backbone, Marionette, $, _
         success: function(response, newValue) {
           self.model.save($(this).data('name'), newValue); //update backbone model
         }
-      })
+      });
     }
   });
 });

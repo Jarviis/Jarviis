@@ -10,7 +10,7 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
   Entities.CommentCollection = Backbone.Collection.extend({
     model: Entities.Comment,
     initialize: function(options) {
-      this.issue_id = options.issue_id
+      this.issue_id = options.issue_id;
     },
 
     url: function() {
@@ -21,14 +21,14 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
 
   var API = {
     getCommentEntity: function(issue_id) {
-      var comments = new Jarviis.Entities.CommentCollection({"issue_id": issue_id})
+      var comments = new Jarviis.Entities.CommentCollection({"issue_id": issue_id});
 
       var defer = $.Deferred();
       comments.fetch({
         success: function(data){
           defer.resolve(data);
         },
-        error: function(data){
+        error: function(){
           defer.resolve(undefined);
         }
       });

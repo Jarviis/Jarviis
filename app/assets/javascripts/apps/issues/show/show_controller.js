@@ -1,4 +1,5 @@
 Jarviis.module("Issues.Show", function(Show, Jarviis, Backbone, Marionette, $, _){
+
   Show.Controller = {
     showIssue: function(id) {
       var fetchingIssue = Jarviis.request("issue:entity", id),
@@ -36,9 +37,10 @@ Jarviis.module("Issues.Show", function(Show, Jarviis, Backbone, Marionette, $, _
         layout.details.show(issueView);
         layout.comments.show(new Jarviis.Comments.List.Comments({
           collection: comments
-        }))
+        }));
       });
     }
-  }
+  };
+
 });
 

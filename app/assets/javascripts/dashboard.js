@@ -23,7 +23,7 @@
     },
 
     currentRoute: function(){
-      return Backbone.history.fragment
+      return Backbone.history.fragment;
     }
   });
 

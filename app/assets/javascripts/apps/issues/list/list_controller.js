@@ -4,10 +4,10 @@ Jarviis.module("Issues.List", function(List, Jarviis, Backbone, Marionette, $, _
 
   List.Controller = {
     listIssues: function () {
-      var assignedRequest = Jarviis.request("issues:entity", {assignee_username: current_username});
-          reportedRequest = Jarviis.request("issues:entity", {reporter_username: current_username});
+      var fetchingAssigned = Jarviis.request("issues:entity", {assignee_username: current_username}),
+          fetchingReported = Jarviis.request("issues:entity", {reporter_username: current_username});
 
-      $.when(assignedRequest, reportedRequest).done(function (assigned, reported) {
+      $.when(fetchingAssigned, fetchingReported).done(function (assigned, reported) {
         assigned_issues = assigned;
         reported_issues = reported;
 
@@ -20,8 +20,8 @@ Jarviis.module("Issues.List", function(List, Jarviis, Backbone, Marionette, $, _
     }
   };
 
-  Jarviis.commands.setHandler("issues:new", function(data) {
-    reported_issues.add(data);
+  Jarviis.commands.setHandler("issues:new", function(model, data) {
+    reported_issues.add(model);
   });
 
 });
