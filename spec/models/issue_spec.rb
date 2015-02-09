@@ -51,6 +51,54 @@ describe Issue do
     end
   end
 
+  describe "#has_descendants?" do
+    let!(:root) do
+      FactoryGirl.create(:issue, reporter_id: reporter.id)
+    end
+
+    let!(:child) do
+      FactoryGirl.create(:issue,
+                         reporter_id: reporter.id,
+                         parent_id: root.id)
+    end
+
+    context "when it has descendants" do
+      it "returns true" do
+        expect(root.has_descendants?).to eq(true)
+      end
+    end
+
+    context "when it has none descendant" do
+      it "returns false" do
+        expect(child.has_descendants?).to eq(false)
+      end
+    end
+  end
+
+  describe "#has_parent?" do
+    let!(:root) do
+      FactoryGirl.create(:issue, reporter_id: reporter.id)
+    end
+
+    let!(:child) do
+      FactoryGirl.create(:issue,
+                         reporter_id: reporter.id,
+                         parent_id: root.id)
+    end
+
+    context "when it has parent_id set" do
+      it "returns true" do
+        expect(child.has_parent?).to eq(true)
+      end
+    end
+
+    context "when it has not parent_id set" do
+      it "returns false" do
+        expect(root.has_parent?).to eq(false)
+      end
+    end
+  end
+
   describe "#assignee_name" do
     let(:issue) do
       FactoryGirl.create(:issue,
