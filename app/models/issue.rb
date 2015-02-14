@@ -24,11 +24,14 @@ class Issue < ActiveRecord::Base
 
   belongs_to :reporter, class_name: "User", foreign_key: "reporter_id"
   belongs_to :assignee, class_name: "User", foreign_key: "assignee_id"
+  belongs_to :team
 
   has_many :attachments
 
   validates :state, inclusion: { in: [OPEN, RESOLVED, CLOSED, WONTFIX] }
-  validates_presence_of :name, :state, :reporter
+  validates_presence_of :name, :state, :reporter, :team_id
+
+  after_commit :prepend_slug, if: -> { !slug_ok? }, on: [:create, :update]
 
   # @return [String] A humananized representation of the state of the issue.
   def state_to_s
@@ -95,6 +98,25 @@ class Issue < ActiveRecord::Base
     return false if self.state == Issue::OPEN
 
     self.state = Issue::OPEN
+    self.save
+  end
+
+  def generate_slug
+    "#{self.team.slug}-#{self.id}"
+  end
+
+  def slug_ok?
+    !!(self.name =~ /^#{generate_slug}/) ? true : false
+  end
+
+  private
+
+  def prepend_slug
+    if self.name =~ /#{self.id}/
+      self.name = self.name.gsub(/^.*#{id}/, '')
+    end
+
+    self.name = "#{generate_slug} #{self.name}".squeeze
     self.save
   end
 end

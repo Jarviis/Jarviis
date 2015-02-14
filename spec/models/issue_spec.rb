@@ -3,11 +3,45 @@ require 'spec_helper'
 describe Issue do
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:state) }
+  it { should validate_presence_of(:team_id) }
   it { should ensure_inclusion_of(:state).in_array([Issue::OPEN, Issue::RESOLVED, Issue::CLOSED, Issue::WONTFIX]) }
   it { should validate_presence_of(:reporter) }
 
   let(:reporter) { FactoryGirl.create(:user) }
   let(:assignee) { FactoryGirl.create(:user) }
+
+  describe "after_save callbacks" do
+    context "when the record is new" do
+      let!(:team) do
+        FactoryGirl.create(:team, slug: "DEV")
+      end
+      let!(:issue) { FactoryGirl.create(:issue, team: team) }
+
+      before { issue.run_callbacks(:commit) }
+
+      it "sets prepends the slug and the id" do
+        expect(issue.name).to match(/DEV-#{issue.id}/)
+      end
+    end
+
+    context "when it is an update" do
+      let!(:team) do
+        FactoryGirl.create(:team, slug: "DEV")
+      end
+      let!(:issue) { FactoryGirl.create(:issue, team: team) }
+      let(:another_team) { FactoryGirl.create(:team, slug: "OPS") }
+
+      before do
+        issue.team_id = another_team.id
+        issue.save
+        issue.run_callbacks(:commit)
+      end
+
+      it "re-sets the name with the correct slug prepended" do
+        expect(issue.name).to match(/OPS-#{issue.id}/)
+      end
+    end
+  end
 
   describe "#state_to_s" do
     let(:open) do

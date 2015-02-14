@@ -3,6 +3,8 @@ FactoryGirl.define do
     sequence (:name) { |n| "Name #{n}" }
     state Issue::OPEN
     description "I am a fancy description"
+    association :team, factory: :team
+    association :reporter, factory: :user
   end
 
   trait :open do
