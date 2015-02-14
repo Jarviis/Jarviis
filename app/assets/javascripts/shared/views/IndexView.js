@@ -48,13 +48,14 @@ Marionette.IndexView = Marionette.CompositeView.extend({
         .addClass('active');
 
     if (totalPages === id ) {
-      disabled = "next";
-    } else if (firstPage === id - 1) {
-      disabled = "previous";
+      this.$('li.next')
+        .addClass('disabled')
+    }
+    if (firstPage === id - 1) {
+      this.$('li.previous')
+        .addClass('disabled')
     }
 
-    this.$('li.'+disabled)
-        .addClass('disabled')
   },
 
   serializeData: function () {
