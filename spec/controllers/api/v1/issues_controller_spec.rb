@@ -40,6 +40,7 @@ describe Api::V1::IssuesController do
 
   describe "POST create" do
     let(:assignee) { FactoryGirl.create(:user) }
+    let(:team) { FactoryGirl.create(:team) }
 
     context "with valid params" do
 
@@ -47,7 +48,8 @@ describe Api::V1::IssuesController do
         { issue: {
             assignee_id: assignee.id,
             name: "Make Jarviis awesome",
-            description: "I am a fancy description ftw"
+            description: "I am a fancy description ftw",
+            team_id: team.id
           }
         }
       end
