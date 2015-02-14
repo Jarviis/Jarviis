@@ -6,20 +6,16 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
       pageSize: 5
     },
     mode: "client",
-    url: function() {
-      return '/api/v1/issues';
-    },
-    initialize: function (options) {
-      this.options = options;
-    }
+    url: "/api/v1/issues"
   });
 
   var API = {
-    getIssueEntity: function(issueId){
-      var issue = new Entities.Issue({id: issueId}),
+    getIssuesEntity: function (data) {
+      var issues = new Jarviis.Entities.IssueCollection(),
           defer = $.Deferred();
 
-      issue.fetch({
+      issues.fetch({
+        data: data,
         success: function(data){
           defer.resolve(data);
         },
@@ -29,11 +25,11 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
       });
 
       return defer.promise();
-    },
+    }
   };
 
-  Jarviis.reqres.setHandler("issue:entity", function(id){
-    return API.getIssueEntity(id);
+  Jarviis.reqres.setHandler("issues:entity", function (data) {
+    return API.getIssuesEntity(data);
   });
 
 });

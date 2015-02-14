@@ -14,8 +14,8 @@ Jarviis.module("Issues.List", function(List, Jarviis, Backbone, Marionette, $, _
         Jarviis.layout = new Jarviis.Issues.List.Layout();
         Jarviis.mainRegion.show(Jarviis.layout);
 
-        Jarviis.layout.assigned.show(new Jarviis.Issues.List.Issues({collection: assigned_issues}));
-        Jarviis.layout.reported.show(new Jarviis.Issues.List.Issues({collection: reported_issues}));
+        Jarviis.layout.assigned.show(new Jarviis.Issues.List.Issues({collection: assigned_issues, title: "Assigned Issues"}));
+        Jarviis.layout.reported.show(new Jarviis.Issues.List.Issues({collection: reported_issues, title: "Reported Issues"}));
       });
     }
   };
