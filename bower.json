@@ -8,6 +8,7 @@
     "marionette.backbone.syphon": "~0.5.0",
     "moment": "~2.8.3",
     "chosen": "https://github.com/harvesthq/chosen/releases/download/v1.1.0/chosen_v1.1.0.zip",
-    "handlebars": "~2.0.0"
+    "handlebars": "~2.0.0",
+    "paginator": "~0.1.0"
   }
 }
