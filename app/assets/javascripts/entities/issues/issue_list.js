@@ -1,7 +1,11 @@
 Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, _){
 
-  Entities.IssueCollection = Backbone.Collection.extend({
+  Entities.IssueCollection = Backbone.PageableCollection.extend({
     model: Jarviis.Entities.Issue,
+    state: {
+      pageSize: 5
+    },
+    mode: "client",
     url: function() {
       return '/api/v1/issues';
     },

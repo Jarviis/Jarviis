@@ -19,6 +19,7 @@
 //= require backbone.babysitter
 //= require marionette
 //= require moment
+//= require paginator
 //= require chosen/chosen.jquery
 //= require_tree ./util
 //= require marionette.backbone.syphon

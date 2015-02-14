@@ -8,13 +8,13 @@
       });
     },
 
-    states: function () {
+    states: function (index) {
       return [
         'Open',
         'Resolved',
         'Closed',
         'Wontfix'
-      ];
+      ][index];
     },
 
     navigate: function(route, options){

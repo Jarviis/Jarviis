@@ -24,6 +24,13 @@ Jarviis.module("Issues.List", function(List, Jarviis, Backbone, Marionette, $, _
 
       Jarviis.navigate('issues/'+id);
       Jarviis.Issues.Show.Controller.showIssue(id);
+    },
+
+    serializeData: function () {
+      var model = this.model.toJSON();
+      return _.extend(model, {
+        state: Jarviis.states(model.state)
+      });
     }
   });
 
@@ -33,11 +40,7 @@ Jarviis.module("Issues.List", function(List, Jarviis, Backbone, Marionette, $, _
     template: _.template('<td colspan="2">Hooray! You have no open issues!</td>')
   });
 
-  List.Issues = Marionette.CompositeView.extend({
-    tagName: 'table',
-    className: 'table table-striped table-hover', /* Bootstrap class for tables */
-    template: "#list-issues-template",
-    childViewContainer: "tbody",
+  List.Issues = Marionette.IndexView.extend({
     childView: List.Issue,
     emptyView: NoIssueView
   });
