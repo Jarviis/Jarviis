@@ -1,0 +1,19 @@
+<h3 data-name="name" class="editable editable-click">{{name}}</h3>
+<p data-type="textarea" data-name="description" class="editable editable-click">{{description}}</p>
+<table class="table">
+  <tbody>
+  <tr><td>Resolution:</td><td><span class="label label-primary">{{ status }}</span></td></tr>
+  <tr><td>Type:</td><td>Task</td></tr>
+  <tr><td>Due Date:</td><td>{{date due_date "MMMM Do YYYY"}}</td></tr>
+  <tr><td>Assignee:</td><td>{{ assignee.name }}</td></tr>
+  <tr><td>Reporter:</td><td>{{ reporter.name }}</td></tr>
+  <tr><td>Created:</td><td>{{date created_at "MMMM Do YYYY, HH:mm:ss"}}</td></tr>
+  <tr><td>Last Updated:</td><td>{{date updated_at "MMMM Do YYYY, HH:mm:ss"}}</td></tr>
+  </tbody>
+</table>
+<div class="btn-group">
+  <button type="button" class="btn btn-default" id="resolve">Resolve</button>
+  <button type="button" class="btn btn-default" id="open">Open</button>
+  <button type="button" class="btn btn-default" id="close">Close</button>
+  <button type="button" class="btn btn-default">Edit</button>
+</div>

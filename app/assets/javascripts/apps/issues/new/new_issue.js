@@ -31,10 +31,10 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
       if(data) {
         var newIssue = new Jarviis.Entities.Issue();
         newIssue.save(data, {success: function (model) {
-          Jarviis.execute("issues:new", model);
+          Jarviis.execute("issues:new", model, data);
         }});
       }
-      Jarviis.modal.destroy();
+      this.exit();
     },
     onRender: function () {
       this.ui.assignee.chosen({allow_single_deselect: true});
@@ -50,13 +50,13 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
       });
     },
     exit: function () {
-      Jarviis.modal.destroy();
+      Jarviis.modalRegion.reset();
     },
     serializeData: function () {
       var users = this.users ? this.users.toJSON() : [];
       return {
         users: users
-      }
+      };
     }
   });
 });
