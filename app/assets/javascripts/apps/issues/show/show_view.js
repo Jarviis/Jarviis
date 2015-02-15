@@ -16,12 +16,16 @@ Jarviis.module("Issues.Show", function(Show, Jarviis, Backbone, Marionette, $, _
   Show.Issue = Marionette.ItemView.extend({
     template: "#issue-details-template",
     events: {
+      'click button#upload': 'upload',
       'click button#resolve': 'resolveIssue',
       'click button#open': 'openIssue',
       'click button#close': 'closeIssue'
     },
     modelEvents: {
       "change": "onModelChange"
+    },
+    upload: function () {
+      Jarviis.modalRegion.show(new Jarviis.Issues.New.Upload());
     },
     resolveIssue: function () {
       this.model.resolve();

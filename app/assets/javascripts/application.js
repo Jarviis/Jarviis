@@ -19,7 +19,9 @@
 //= require backbone.babysitter
 //= require marionette
 //= require moment
-//= require paginator/pagination
+//= require paginator
+//= require alertifyjs
+//= require flow.js/dist/flow
 //= require chosen/chosen.jquery
 //= require_tree ./util
 //= require marionette.backbone.syphon
