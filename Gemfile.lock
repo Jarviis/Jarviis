@@ -53,6 +53,11 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 1.0.0)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
     celluloid (0.15.2)
       timers (~> 1.1.0)
     celluloid-io (0.15.0)
@@ -131,6 +136,7 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (1.25.1)
+    mini_magick (4.0.2)
     mini_portile (0.5.3)
     minitest (5.3.3)
     multi_json (1.9.2)
@@ -268,6 +274,7 @@ DEPENDENCIES
   bootstrap-x-editable-rails
   capistrano
   capybara (~> 2.0.0)
+  carrierwave (= 0.10.0)
   database_cleaner (~> 0.8.0)
   devise
   elasticsearch-model
@@ -277,6 +284,7 @@ DEPENDENCIES
   guard-rspec (~> 2.2.1)
   guard-spork (~> 1.4.2)
   kaminari
+  mini_magick
   pg
   pry-byebug
   pry-rails

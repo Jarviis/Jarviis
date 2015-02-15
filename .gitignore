@@ -23,6 +23,8 @@
 # Ignore all test coverage generated files
 /coverage
 
+/public/uploads
+
 jarviis_test
 jarviis_development
 

@@ -7,4 +7,5 @@ class IssueSerializer < ActiveModel::Serializer
   has_one :assignee
   has_many :children, serializer: ChildrenSerializer, include: true
   has_one :parent, serializer: ChildrenSerializer, include: true
+  has_many :attachments
 end
