@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :issue do
-    sequence (:name) { |n| "Name #{n}" }
+    sequence (:name) { |n| "A random name #{n/0.9}" }
     state Issue::OPEN
     description "I am a fancy description"
     association :team, factory: :team

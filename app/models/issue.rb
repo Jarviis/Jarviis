@@ -34,6 +34,9 @@ class Issue < ActiveRecord::Base
 
   after_commit :prepend_slug, if: -> { !slug_ok? }, on: [:create, :update]
 
+  after_commit :update_sprint_percentage, if: -> { sprint_id.present? }
+  delegate :update_sprint_percentage, to: :sprint
+
   # @return [String] A humananized representation of the state of the issue.
   def state_to_s
     HUMANIZED_STATE[self.state]
@@ -113,11 +116,12 @@ class Issue < ActiveRecord::Base
   private
 
   def prepend_slug
-    if self.name =~ /#{self.id}/
-      self.name = self.name.gsub(/^.*#{id}/, '')
+    if self.name =~ /(^|\s|-)#{self.id}\s/
+      self.name = self.name.gsub(/^.*(\s|-)#{id}/, '')
     end
 
-    self.name = "#{generate_slug} #{self.name}".squeeze
+    previous_name = self.name.dup
+    self.name = "#{generate_slug} #{previous_name}".squeeze
     self.save
   end
 end

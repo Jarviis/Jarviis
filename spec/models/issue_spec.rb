@@ -41,6 +41,27 @@ describe Issue do
         expect(issue.name).to match(/OPS-#{issue.id}/)
       end
     end
+
+    context "when it is an update on state" do
+      context "and it belongs to a sprint" do
+        let(:team) { FactoryGirl.create(:team) }
+        let(:sprint) { FactoryGirl.create(:sprint) }
+        let!(:issue) do
+          FactoryGirl.create(:issue, sprint: sprint, team: team)
+        end
+
+        before do
+          issue.state = ::Issue::RESOLVED
+        end
+
+        it "updates the sprint's percentage" do
+          issue.sprint.should_receive(:update_sprint_percentage)
+
+          issue.save
+          issue.run_callbacks(:commit)
+        end
+      end
+    end
   end
 
   describe "#state_to_s" do
