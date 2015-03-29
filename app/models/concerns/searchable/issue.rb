@@ -25,4 +25,48 @@ module Searchable::Issue
       end
     end
   end
+
+  module ClassMethods
+
+    # Search in the _all field with filters
+    def global_search(keyword, operator="and", options={})
+
+      query = {
+        query: {
+          filtered: {
+            query: {
+              match: {
+                _all: {
+                  query: keyword,
+                  operator: operator
+                }
+              }
+            },
+            filter: {
+              bool: {
+                must: []
+              }
+            }
+          }
+        }
+      }
+
+      if options[:state].present?
+        query[:query][:filtered][:filter][:bool][:must] <<
+          { term: { state: options[:state] } }
+      end
+
+      if options[:assignee_id].present?
+        query[:query][:filtered][:filter][:bool][:must] <<
+          { term: { assignee_id: options[:assignee_id] } }
+      end
+
+      if options[:reporter_id].present?
+        query[:query][:filtered][:filter][:bool][:must] <<
+          { term: { reporter_id: options[:reporter_id] } }
+      end
+
+      __elasticsearch__.search(query)
+    end
+  end
 end
