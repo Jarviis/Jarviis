@@ -10,18 +10,28 @@ class Api::V1::IssuesController < Api::V1::ApiController
   end
 
   def search
-    query = params[:query]
+    keyword = params.delete(:keyword)
 
-    if query.blank?
-      @issues = Issue.all
+    issues = []
+    if keyword.blank?
+      issues = Issue.all
     else
-      query = ElasticsearchQuerySanitizer.sanitize(query)
+      manager = Search::Manager.new(keyword, Issue, "and", params)
 
-      @issues = Issue.search(query).page(params[:page] || 1).
-        results.to_a
+      # Perform the ES query
+      manager.global_search
+      if manager.empty?
+        issues = []
+      else
+        ids = manager.ids
+
+        # Retain ES ordering
+        issues_hash = Issue.where(id: ids).index_by(&:id)
+        issues = ids.map { |id| issues_hash[id] }
+      end
     end
 
-    render json: @issues
+    render json: issues
   end
 
   def show
