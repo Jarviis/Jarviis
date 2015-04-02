@@ -16,6 +16,14 @@
           {{/each}}
         </select>
       </div>
+      <div class="form-group">
+        <select id="team" name="team_id">
+          <option value="">Choose a Team</option>
+          {{#each teams}}
+          <option value="{{ id }}">{{ slug }} - {{ name }}</option>
+          {{/each}}
+        </select>
+      </div>
       <div class="form-group"><input type="text" class="form-control" name="due_date" id="due-date" placeholder="eg. 1 Apr 14" /></div>
       <div class="form-group"><textarea name="description" class="form-control" placeholder="Write some details..." id= rows="8" cols="40"></textarea></div>
     </form>

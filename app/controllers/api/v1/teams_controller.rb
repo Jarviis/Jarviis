@@ -2,7 +2,7 @@ class Api::V1::TeamsController < Api::V1::ApiController
   def index
     @teams = Team.all
 
-    render json: @team
+    render json: @teams
   end
 
   def show

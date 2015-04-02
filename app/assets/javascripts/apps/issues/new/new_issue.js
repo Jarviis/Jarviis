@@ -13,15 +13,18 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
       minimized: '.modal-minimized',
       name: '#name',
       assignee: '#assignee',
+      team: '#team',
       reporter: '#reporter',
       due_date: '#due-date',
       description: '#description'
     },
     initialize: function () {
       var fetchingUsers = Jarviis.request('users:entity');
+      var fetchingTeams = Jarviis.request('teams:entity');
       var self = this;
-      $.when(fetchingUsers).done(function(users){
+      $.when(fetchingUsers, fetchingTeams).done(function(users, teams){
         self.users = users;
+        self.teams = teams;
         self.render();
       });
     },
@@ -38,6 +41,7 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
     },
     onRender: function () {
       this.ui.assignee.chosen({allow_single_deselect: true});
+      this.ui.team.chosen({allow_single_deselect: true});
     },
     maximize: function () {
       this.ui.minimized.hide();
@@ -54,8 +58,10 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
     },
     serializeData: function () {
       var users = this.users ? this.users.toJSON() : [];
+      var teams = this.teams ? this.teams.toJSON() : [];
       return {
-        users: users
+        users: users,
+        teams: teams
       };
     }
   });
