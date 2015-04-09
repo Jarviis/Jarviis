@@ -55,6 +55,10 @@ end
 
 group :development do
   gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano3-unicorn'
+  gem 'capistrano-rvm'
+  gem 'capistrano-bower'
 end
 
 group :development, :test do

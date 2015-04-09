@@ -15,6 +15,20 @@ module Jarviis
     config.autoload_paths += %W(#{config.root}/lib)
     config.assets.paths << Rails.root.join('app', 'assets', 'components')
 
+    initializer 'setup_asset_pipeline', group: :all do |app|
+      app.config.assets.precompile.shift
+
+      app.config.assets.precompile.push(Proc.new do |path|
+        File.extname(path).in? [
+          '.html', '.erb', '.haml',                 # Templates
+          '.png',  '.gif', '.jpg', '.jpeg',         # Images
+          '.eot',  '.otf', '.svc', '.woff', '.ttf'  # Fonts
+        ]
+      end)
+    end
+
+    config.serve_static_assets = true
+
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'

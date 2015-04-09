@@ -30,3 +30,6 @@ jarviis_development
 
 # bower
 /app/assets/components
+
+# capistrano
+.capistrano/*
