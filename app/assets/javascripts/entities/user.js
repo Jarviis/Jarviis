@@ -28,3 +28,4 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
     return API.getUsersEntity();
   });
 });
+
