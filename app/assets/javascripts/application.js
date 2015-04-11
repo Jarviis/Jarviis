@@ -22,9 +22,12 @@
 //= require paginator
 //= require alertifyjs
 //= require flow.js/dist/flow
+//= require lightbox/js/lightbox.min.js
+//= require markdown/lib/markdown.js
 //= require chosen/chosen.jquery
 //= require_tree ./util
 //= require marionette.backbone.syphon
+//= require bootstrap3-editable/bootstrap-editable
 //= require bootstrap3-editable/bootstrap-editable
 //= require_tree ./shared
 //= require dashboard

@@ -12,18 +12,18 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
       'click #close': 'exit',
       'click #minimize': 'minimize',
       'click #maximize': 'maximize',
-      'click .upload': 'upload'
+      'click .upload': 'upload',
+      'paste #url': 'paste',
+      'drop #drop-zone': 'drop',
+      'dragenter #drop-zone': 'highDropZone',
+      'dragleave #drop-zone': 'unhighDropZone',
+      'dragover #drop-zone': 'dragOver'
     },
 
     initialize: function () {
-      this.r = new Flow({
-        target: this.url,
-      });
-
       this.collection = new Backbone.Collection();
 
       this.collection.on('add', this.renderList, this);
-      this.listenTo(this.r, 'filesAdded', _.bind(this.fileAdded, this))
     },
 
     url: function () {
@@ -43,39 +43,85 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
       });
     },
 
-    upload: function () {
-      if (this.collection.length) {
-        $('#controls').hide();
+    highDropZone: function (ev) {
+      ev.preventDefault();
+    },
 
-        this.collection.each(function (file) {
+    dragOver: function (ev) { ev.preventDefault(); },
+
+    unhighDropZone: function(ev) {
+      ev.preventDefault();
+    },
+
+    drop: function (ev) {
+      var e = null,
+          picture = null;
+
+      ev.preventDefault();
+      ev.stopPropagation();
+
+      e = ev.originalEvent;
+      e.dataTransfer.dropEffect = 'copy';
+
+      file = e.dataTransfer.files[0];
+
+      this.addFiles({
+        name: file.name,
+        file: file
+      });
+
+    },
+
+    paste: function (ev) {
+      var self = this;
+      var $el = this.$(ev.currentTarget);
+
+      setTimeout(function () {
+        var url = $el.val();
+        var file = _.last(url.split('/'));
+        self.addFiles({
+          name: url,
+          file: file,
+          remote_image_url: true
+        });
+      }, 0);
+    },
+
+    addFiles: function (attributes) {
+      console.log(attributes);
+      this.collection.add(attributes);
+    },
+
+    upload: function () {
+      var url = this.url();
+
+      if (this.collection.length) {
+        this.collection.each(function (model) {
+          var formData = new FormData();
+          if (model.get('remote_image_url')) {
+            formData.append('remote_image_url', model.get('name'));
+            formData.append('attachment[filename]', model.get('file'));
+          } else {
+            formData.append('attachment[filename]', model.get('file'));
+          }
+
           $.ajax({
-            url: this.url(),
-            data: {
-              file: file.get('file'),
-              filename: file.get('name')
-            },
+            url: url,
+            type: 'POST',
             contentType: false,
             processData: false,
-            type: 'POST'
+            data: formData
+          })
+          .done(function () {
+          })
+          .fail(function() {
+            console.log(arguments)
           });
         }, this);
+
       } else {
-        alertify.log('Please choose some files to upload.')
+        alertify.log("Please add a file to the upload queue.")
       }
-    },
-
-    fileSuccess: function () {
-      console.log(arguments);
-    },
-
-    fileProgress: function (progress) {
-      $('.progress-bar').css('width', progress + "%");
-    },
-
-    fileAdded: function (files) {
-      $('.upload-files').show();
-
-      this.collection.add(files);
     },
 
     renderList: function (model) {
@@ -93,15 +139,13 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
       });
 
       $('#processed-files').html(html);
+      this.$('.upload-files').show();
     },
 
     exit: function () {
       Jarviis.modalRegion.reset();
-    },
-
-    onDomRefresh: function () {
-      this.r.assignDrop(this.$('#drop-zone'));
     }
+
   });
 });
 

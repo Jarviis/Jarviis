@@ -10,9 +10,20 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
   Entities.Issue = Backbone.Model.extend({
     urlRoot: '/api/'+apiVer+'/issues',
 
+    initialize: function () {
+      this.on('change:description', this.onDescriptionChange, this);
+    },
+
     parse: function(data) {
       data.status = states[data.state];
+      data.description_html = markdown.toHTML(data.description);
+
       return data;
+    },
+
+    onDescriptionChange: function() {
+      var html = markdown.toHTML(this.get('description'));
+      this.set('description_html', html);
     },
 
     resolve: function () {
