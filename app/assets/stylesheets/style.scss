@@ -20,6 +20,9 @@ main#landing {
   background: none repeat scroll 0 0 rgba(44, 62, 80, 0.6);
   color: #F7F7F7;
 }
+.hidden {
+  display: none!important;
+}
 #full-bg {
   background: url('/background.png');
   background-size: cover;
@@ -77,6 +80,23 @@ main#landing {
   .dropdown-menu {
     margin-top: 3px!important;
   }
+  #results {
+    position: absolute;
+    top: 50px;
+    z-index: 9999;
+    width: 400px;
+    -webkit-box-shadow: 0px 5px 10px 1px rgba(128,128,128,0.3);
+    -moz-box-shadow: 0px 5px 10px 1px rgba(128,128,128,0.3);
+    box-shadow: 0px 5px 10px 1px rgba(128,128,128,0.3);
+
+    .list-group-item:first-child {
+      border-radius: 0;
+    }
+
+    .active a {
+      color: #fff;
+    }
+  }
   .fa-terminal {
     left: 28px;
     position: relative;
@@ -84,7 +104,8 @@ main#landing {
     color: #f7f7f7;
     font-size: 20px;
   }
-  #search {
+  #search-input {
+    width: 400px;
     background: transparent;
     border: 0;
     -moz-box-shadow: none;
@@ -92,9 +113,6 @@ main#landing {
     box-shadow: none;
     padding-left: 30px;
     color: #16a085;
-  }
-  li {
-    margin-top: 2px;
   }
   .avatar {
     margin-right: 10px;

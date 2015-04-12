@@ -13,12 +13,8 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <% if user_signed_in? %>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <i class="fa fa-terminal"></i>
-          <input type="text" class="form-control" id="search" placeholder="What can I do for you?">
-        </div>
-      </form>
+      <div id="search" class="navbar-form navbar-left" role="search">
+      </div>
       <% end %>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
