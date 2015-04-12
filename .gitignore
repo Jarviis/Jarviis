@@ -7,6 +7,8 @@
 # Ignore bundler config.
 /.bundle
 
+.DS_Store
+
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
@@ -21,8 +23,13 @@
 # Ignore all test coverage generated files
 /coverage
 
+/public/uploads
+
 jarviis_test
 jarviis_development
 
 # bower
 /app/assets/components
+
+# capistrano
+.capistrano/*

@@ -21,7 +21,7 @@ main#landing {
   color: #F7F7F7;
 }
 #full-bg {
-  background: url('/assets/background.png');
+  background: url('/background.png');
   background-size: cover;
   height: 100%;
   left: 0;
@@ -33,6 +33,7 @@ main#landing {
 
 #assigned, #reported {
   padding: 0;
+  display: inline;
   .no-issue td {
     text-align: center;
     color: #777;

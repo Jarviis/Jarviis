@@ -1,5 +1,8 @@
 class Issue < ActiveRecord::Base
   include Searchable::Issue
+  extend  ActsAsTree::Presentation
+
+  acts_as_tree
 
   OPEN = 0
   RESOLVED = 1
@@ -22,6 +25,8 @@ class Issue < ActiveRecord::Base
   belongs_to :reporter, class_name: "User", foreign_key: "reporter_id"
   belongs_to :assignee, class_name: "User", foreign_key: "assignee_id"
 
+  has_many :attachments
+
   validates :state, inclusion: { in: [OPEN, RESOLVED, CLOSED, WONTFIX] }
   validates_presence_of :name, :state, :reporter
 
@@ -32,6 +37,16 @@ class Issue < ActiveRecord::Base
 
   def as_indexed_json(options={})
     as_json(methods: [:assignee_name, :assignee_username, :reporter_username, :reporter_name])
+  end
+
+  # @return [Boolean] True if it has at least one descendant
+  def has_descendants?
+    self.descendants.count > 0
+  end
+
+  # @return [Boolean] True if it has parent_id set
+  def has_parent?
+    !!self.parent_id
   end
 
   # @return [String] The name of the assignee, Nobody if there is no assignee

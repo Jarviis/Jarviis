@@ -1,4 +1,5 @@
 Jarviis.module("Issues.List", function(List, Jarviis, Backbone, Marionette, $, _){
+
   List.Layout = Marionette.LayoutView.extend({
     template: "#issues-template",
     regions: {
@@ -10,15 +11,26 @@ Jarviis.module("Issues.List", function(List, Jarviis, Backbone, Marionette, $, _
 
   List.Issue = Marionette.ItemView.extend({
     tagName: 'tr',
-    template: _.template("<td><a href='#<%-id%>'><%-name%></a></td><td><%-state%></td>"),
+    template: _.template("<td><a href='#<%- id %>'><%- name %></a></td><td><%- state %></td>"),
+
     events: {
       'click a': 'navigate'
     },
+
     navigate: function(e) {
-      e.preventDefault();
       var id = this.model.id;
+
+      e.preventDefault();
+
       Jarviis.navigate('issues/'+id);
       Jarviis.Issues.Show.Controller.showIssue(id);
+    },
+
+    serializeData: function () {
+      var model = this.model.toJSON();
+      return _.extend(model, {
+        state: Jarviis.states(model.state)
+      });
     }
   });
 
@@ -28,11 +40,7 @@ Jarviis.module("Issues.List", function(List, Jarviis, Backbone, Marionette, $, _
     template: _.template('<td colspan="2">Hooray! You have no open issues!</td>')
   });
 
-  List.Issues = Marionette.CompositeView.extend({
-    tagName: 'table',
-    className: 'table table-striped table-hover', /* Bootstrap class for tables */
-    template: "#list-issues-template",
-    childViewContainer: "tbody",
+  List.Issues = Marionette.IndexView.extend({
     childView: List.Issue,
     emptyView: NoIssueView
   });

@@ -1,23 +1,22 @@
 Jarviis.module("Issues", function(Issues, Jarviis, Backbone, Marionette, $, _){
-  Issues.Router = Marionette.AppRouter.extend({
-    appRoutes: {
-      "": "listIssues",
-      "issues/:id": "showIssue"
-    }
-  });
 
-  var Controller = {
+  var IssuesController = Marionette.Controller.extend({
     showIssue: function(id) {
       Jarviis.Issues.Show.Controller.showIssue(id)
     },
     listIssues: function() {
       Jarviis.Issues.List.Controller.listIssues();
     }
-  };
-
-  Jarviis.addInitializer(function(){
-    new Issues.Router({
-      controller: Controller
-    });
   });
+
+  var controller = new IssuesController();
+
+  Issues.Router = new Marionette.AppRouter({
+    controller: controller,
+    appRoutes: {
+      "": "listIssues",
+      "issues/:id": "showIssue"
+    }
+  });
+
 });

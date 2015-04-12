@@ -10,7 +10,9 @@ function getCookie(cname) {
     var token;
     _.each(ca, function(c) {
       c = c.replace(/\s/g,'');
-      if (c.indexOf(name) != -1) token = c.substring(name.length,c.length);
+      if (c.indexOf(name) !== -1) {
+        token = c.substring(name.length,c.length);
+      }
     });
 
     if (token != undefined) {

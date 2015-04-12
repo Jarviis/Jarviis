@@ -27,8 +27,16 @@ gem 'elasticsearch-rails'
 # Comments
 gem 'acts_as_commentable'
 
+# Attachments
+gem 'carrierwave', '0.10.0'
+
+gem 'mini_magick'
+
 # Pagination
 gem 'kaminari'
+
+# Acts as tree
+gem 'acts_as_tree', '~> 1.6.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
@@ -47,6 +55,10 @@ end
 
 group :development do
   gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano3-unicorn'
+  gem 'capistrano-rvm'
+  gem 'capistrano-bower'
 end
 
 group :development, :test do

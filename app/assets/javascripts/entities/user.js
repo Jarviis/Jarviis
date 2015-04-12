@@ -9,7 +9,7 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
   });
 
   var API = {
-    getUsersEntity: function (data) {
+    getUsersEntity: function () {
       var defer = $.Deferred();
       var users = new Jarviis.Entities.UserCollection();
       users.fetch({
@@ -22,9 +22,10 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
       });
       return defer.promise();
     }
-  }
+  };
 
   Jarviis.reqres.setHandler("users:entity", function () {
     return API.getUsersEntity();
   });
 });
+
