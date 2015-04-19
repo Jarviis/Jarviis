@@ -4,7 +4,32 @@ class Api::V1::IssuesController < Api::V1::ApiController
                                    :comments]
 
   def index
-    @issues = Issue.page(params[:page] || 1)
+
+    @issues = Issue.all
+
+    if params[:reporter_username].present?
+      reporter_id = User.select(:id).
+        where(username: params[:reporter_username]).first.try(:id)
+
+      if reporter_id.present?
+        @issues = @issues.where(reporter_id: reporter_id)
+      else
+        @issues = @issues.none
+      end
+    end
+
+    if params[:assignee_username].present?
+      assignee_id = User.select(:id).
+        where(username: params[:assignee_username]).first.try(:id)
+
+      if assignee_id.present?
+        @issues = @issues.where(assignee_id: assignee_id)
+      else
+        @issues.none
+      end
+    end
+
+    @issues = @issues.page(params[:page] || 1)
 
     render json: @issues
   end
