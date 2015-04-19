@@ -15,6 +15,16 @@ class Attachment < ActiveRecord::Base
     !!(filename.file.content_type =~ /^image\/*/)
   end
 
+  def type
+    if filename.file.content_type =~ /^image\/*/
+      "image"
+    elsif filename.file.content_type =~ /^application\/*/
+      "code"
+    else
+      "document"
+    end
+  end
+
   def url
     h = { main: filename.url }
 
