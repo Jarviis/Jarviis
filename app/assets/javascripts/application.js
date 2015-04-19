@@ -19,7 +19,7 @@
 //= require backbone.babysitter
 //= require marionette
 //= require moment
-//= require paginator
+//= require paginator/paginator
 //= require alertifyjs
 //= require flow.js/dist/flow
 //= require lightbox/js/lightbox.min.js
