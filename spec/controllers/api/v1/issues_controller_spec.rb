@@ -30,12 +30,10 @@ describe Api::V1::IssuesController do
 
 
     context "with empty query" do
-      it "returns all Issues" do
+      it "returns no Issues" do
         get :search
 
-        expected = JSON.parse(issues.map { |i| IssueSerializer.new(i) }.to_json)
-
-        expect(json_response).to eq(expected)
+        expect(json_response).to eq([])
       end
     end
   end

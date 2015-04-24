@@ -39,7 +39,7 @@ class Api::V1::IssuesController < Api::V1::ApiController
 
     issues = []
     if keyword.blank?
-      issues = Issue.all
+      issues = Issue.none
     else
       manager = Search::Manager.new(keyword, Issue, "and", params)
 
