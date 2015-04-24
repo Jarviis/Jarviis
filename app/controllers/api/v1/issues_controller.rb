@@ -4,24 +4,59 @@ class Api::V1::IssuesController < Api::V1::ApiController
                                    :comments]
 
   def index
-    @issues = Issue.page(params[:page] || 1)
+
+    @issues = Issue.all
+
+    if params[:reporter_username].present?
+      reporter_id = User.select(:id).
+        where(username: params[:reporter_username]).first.try(:id)
+
+      if reporter_id.present?
+        @issues = @issues.where(reporter_id: reporter_id)
+      else
+        @issues = @issues.none
+      end
+    end
+
+    if params[:assignee_username].present?
+      assignee_id = User.select(:id).
+        where(username: params[:assignee_username]).first.try(:id)
+
+      if assignee_id.present?
+        @issues = @issues.where(assignee_id: assignee_id)
+      else
+        @issues.none
+      end
+    end
+
+    @issues = @issues.page(params[:page] || 1)
 
     render json: @issues
   end
 
   def search
-    query = params[:query]
+    keyword = params.delete(:keyword)
 
-    if query.blank?
-      @issues = Issue.all
+    issues = []
+    if keyword.blank?
+      issues = Issue.all
     else
-      query = ElasticsearchQuerySanitizer.sanitize(query)
+      manager = Search::Manager.new(keyword, Issue, "and", params)
 
-      @issues = Issue.search(query).page(params[:page] || 1).
-        results.to_a
+      # Perform the ES query
+      manager.global_search
+      if manager.empty?
+        issues = []
+      else
+        ids = manager.ids
+
+        # Retain ES ordering
+        issues_hash = Issue.where(id: ids).index_by(&:id)
+        issues = ids.map { |id| issues_hash[id] }
+      end
     end
 
-    render json: @issues
+    render json: issues
   end
 
   def show
