@@ -12,6 +12,8 @@ Jarviis.module("Entities", function(Entities, Jarviis, Backbone, Marionette, $, 
 
     initialize: function () {
       this.on('change:description', this.onDescriptionChange, this);
+
+      Jarviis.commands.setHandler('new:attachments', this.fetch, this);
     },
 
     parse: function(data) {
