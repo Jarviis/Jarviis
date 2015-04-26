@@ -1,19 +1,45 @@
-<h3 data-name="name" class="editable editable-click">{{name}}</h3>
-<p data-type="textarea" data-name="description" class="editable editable-click">{{description}}</p>
-<table class="table">
-  <tbody>
-  <tr><td>Resolution:</td><td><span class="label label-primary">{{ status }}</span></td></tr>
-  <tr><td>Type:</td><td>Task</td></tr>
-  <tr><td>Due Date:</td><td>{{date due_date "MMMM Do YYYY"}}</td></tr>
-  <tr><td>Assignee:</td><td>{{ assignee.name }}</td></tr>
-  <tr><td>Reporter:</td><td>{{ reporter.name }}</td></tr>
-  <tr><td>Created:</td><td>{{date created_at "MMMM Do YYYY, HH:mm:ss"}}</td></tr>
-  <tr><td>Last Updated:</td><td>{{date updated_at "MMMM Do YYYY, HH:mm:ss"}}</td></tr>
-  </tbody>
-</table>
-<div class="btn-group">
-  <button type="button" class="btn btn-default" id="resolve">Resolve</button>
-  <button type="button" class="btn btn-default" id="open">Open</button>
-  <button type="button" class="btn btn-default" id="close">Close</button>
-  <button type="button" class="btn btn-default">Edit</button>
+<div class="col-md-8">
+  <div class="page-header">
+    <h2 data-name="name" class="editable editable-click">{{name}}</h2>
+  </div>
+  <div>
+    <p style="display: none;" id="edit-description" data-type="textarea" data-inputclass="description" data-name="description" class="editable editable-click">{{description}}</p>
+    <div id="description" class="editable-click">{{{description_html}}}</div>
+  </div>
+
+  {{#if attachments}}
+  <h4>Attachments</h4>
+  <div class="row">
+    {{#each attachments}}
+    <div class="col-xs-3 col-md-2">
+      <a href="{{this.url.main}}" data-lightbox="image-1" class="thumbnail">
+        <img src="{{this.url.thumbnail}}" >
+      </a>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+  </ul>
+</div>
+<div class="col-md-4">
+  <div class="buttons btn-group">
+    <button type="button" class="btn btn-default" id="resolve">Resolve</button>
+    <button type="button" class="btn btn-default" id="open">Open</button>
+    <button type="button" class="btn btn-default" id="close">Close</button>
+    <button type="button" class="btn btn-default" id="upload">Upload</button>
+  </div>
+  <div class="well">
+  <table class="table">
+    <tbody>
+    <tr><td>Resolution:</td><td><span class="label label-primary">{{ status }}</span></td></tr>
+    <tr><td>Type:</td><td>Task</td></tr>
+    <tr><td>Due Date:</td><td>{{date due_date "MMMM Do YYYY"}}</td></tr>
+    <tr><td>Assignee:</td><td>{{ assignee.name }}</td></tr>
+    <tr><td>Reporter:</td><td>{{ reporter.name }}</td></tr>
+    <tr><td>Created:</td><td>{{date created_at "MMMM Do YYYY, HH:mm:ss"}}</td></tr>
+    <tr><td>Last Updated:</td><td>{{date updated_at "MMMM Do YYYY, HH:mm:ss"}}</td></tr>
+
+    </tbody>
+  </table>
+  </div>
 </div>

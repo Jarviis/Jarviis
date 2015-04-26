@@ -4,6 +4,9 @@ class Api::V1::AttachmentsController < Api::V1::ApiController
 
   def create
     attachment = @issue.attachments.new(attachment_params)
+    if params[:remote_image_url]
+      attachment.remote_filename_url = params[:remote_image_url]
+    end
 
     if attachment.save
       render json: attachment

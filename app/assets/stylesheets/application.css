@@ -12,6 +12,9 @@
  *= require font-awesome
  *= require_tree .
  *= require_tree ./vendors
+ *= require alertifyjs/dist/css/alertify
+ *= require alertifyjs/dist/css/alertify-bootstrap-3
+ *= require lightbox/css/lightbox.css
  *= require bootstrap3-editable/bootstrap-editable
  */
 @font-face {
