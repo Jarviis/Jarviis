@@ -38,6 +38,9 @@ Jarviis.module("Issues.New", function(New, Jarviis, Backbone, Marionette, $, _){
     },
     onRender: function () {
       this.ui.assignee.chosen({allow_single_deselect: true});
+      this.ui.due_date.datepicker({
+        format: "dd/mm/yy"
+      });
     },
     maximize: function () {
       this.ui.minimized.hide();
