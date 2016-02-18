@@ -1,4 +1,14 @@
+require "spec_helper"
+
 describe Search::Manager do
+  before do
+    Issue.__elasticsearch__.create_index!(index: Issue.index_name)
+  end
+
+  after do
+    User.__elasticsearch__.client.indices.delete(index: Issue.index_name)
+  end
+
   subject { Search::Manager.new("Jarviis!~~", "Issue", "and", {}) }
 
   let(:reporter) { FactoryGirl.create(:user) }
