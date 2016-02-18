@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require 'carrierwave/test/matchers'
+require 'spec_helper'
 
 describe AttachmentUploader do
   include CarrierWave::Test::Matchers

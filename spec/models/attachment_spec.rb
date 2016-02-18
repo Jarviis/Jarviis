@@ -62,6 +62,36 @@ describe Attachment do
     end
   end
 
+  describe "#type" do
+    context "when code" do
+      let(:attachment) do
+        FactoryGirl.create(
+          :attachment,
+          issue: issue,
+          filename: File.open(Rails.root.join("app/models/issue.rb"))
+        )
+      end
+
+      it "returns code" do
+        expect(attachment.type).to eq("code")
+      end
+    end
+
+    context "when image" do
+      let(:attachment) do
+        FactoryGirl.create(
+          :attachment,
+          issue: issue,
+          filename: File.open(Rails.root.join("spec/fixtures/Lenna.png"))
+        )
+      end
+
+      it "returns image" do
+        expect(attachment.type).to eq("image")
+      end
+    end
+  end
+
   describe "#url" do
     context "when the file is an image" do
       let(:attachment) do

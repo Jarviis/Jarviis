@@ -18,7 +18,7 @@ class Attachment < ActiveRecord::Base
   def type
     if filename.file.content_type =~ /^image\/*/
       "image"
-    elsif filename.file.content_type =~ /^application\/*/
+    elsif filename.file.content_type =~ /^(application|text)\/*/
       "code"
     else
       "document"
