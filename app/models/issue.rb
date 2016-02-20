@@ -34,8 +34,9 @@ class Issue < ActiveRecord::Base
 
   after_commit :prepend_slug, if: -> { !slug_ok? }, on: [:create, :update]
 
-  after_commit :update_sprint_percentage, if: -> { sprint_id.present? }
-  delegate :update_sprint_percentage, to: :sprint
+  after_commit :update_sprint_percentage!, if: :qualify_current_sprint_update
+  after_commit :previous_sprint_update, if: :qualify_previous_sprint_update
+  delegate :update_sprint_percentage!, to: :sprint
 
   # @return [String] A humananized representation of the state of the issue.
   def state_to_s
@@ -115,13 +116,31 @@ class Issue < ActiveRecord::Base
 
   private
 
+  def qualify_current_sprint_update
+    self.new_record? ||
+      (self.sprint_id.present? &&
+        (self.previous_changes.keys.include?("sprint_id") ||
+         self.previous_changes.keys.include?("state")))
+  end
+
+  def qualify_previous_sprint_update
+    self.previous_changes["sprint_id"] &&
+      !self.previous_changes["sprint_id"].first.nil?
+  end
+
+  def previous_sprint_update
+    sprint = Sprint.find(self.previous_changes["sprint_id"].first)
+
+    sprint.update_sprint_percentage!
+  end
+
   def prepend_slug
     if self.name =~ /(^|\s|-)#{self.id}\s/
       self.name = self.name.gsub(/^.*(\s|-)#{id}/, '')
     end
 
     previous_name = self.name.dup
-    self.name = "#{generate_slug} #{previous_name}".squeeze
+    self.name = "#{generate_slug} #{previous_name}".squish
     self.save
   end
 end

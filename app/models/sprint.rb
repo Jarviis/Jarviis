@@ -9,10 +9,10 @@ class Sprint < ActiveRecord::Base
   def update_sprint_percentage!
     total_issues = issues.count
     if !total_issues.zero?
-      closed_count =
+      closed_issues  =
         Issue.where("state <> #{Issue::OPEN}").count
 
-      self.percentage = closed_count / total_count.to_f
+      self.percentage = closed_issues / total_issues.to_f
     else
       self.percentage = 0.0
     end

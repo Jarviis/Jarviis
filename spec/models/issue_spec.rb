@@ -55,7 +55,7 @@ describe Issue do
         end
 
         it "updates the sprint's percentage" do
-          issue.sprint.should_receive(:update_sprint_percentage)
+          issue.sprint.should_receive(:update_sprint_percentage!)
 
           issue.save
           issue.run_callbacks(:commit)
