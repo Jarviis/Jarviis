@@ -62,9 +62,6 @@ group :development do
 end
 
 group :development, :test do
-  gem "guard-rspec", '~> 2.2.1', :require => nil
-  gem "guard-spork", '~> 1.4.2', :require => nil
-
   # Pry REPL and friends
   gem 'pry-rails'
   gem 'pry-byebug'
