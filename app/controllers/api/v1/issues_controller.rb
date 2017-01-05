@@ -120,7 +120,7 @@ class Api::V1::IssuesController < Api::V1::ApiController
   def issue_params
     params.require(:issue).permit(:state, :name,
       :description, :assignee_id, :reporter_id, :due_date,
-      :parent_id)
+      :parent_id, :team_id)
   end
 
   def method_missing(method, *args)

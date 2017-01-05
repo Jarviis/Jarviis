@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141026155737) do
+ActiveRecord::Schema.define(version: 20150214232458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,11 +58,27 @@ ActiveRecord::Schema.define(version: 20141026155737) do
     t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "team_id"
+    t.integer  "sprint_id"
   end
 
   add_index "issues", ["assignee_id"], name: "index_issues_on_assignee_id", using: :btree
   add_index "issues", ["parent_id"], name: "index_issues_on_parent_id", using: :btree
   add_index "issues", ["reporter_id"], name: "index_issues_on_reporter_id", using: :btree
+  add_index "issues", ["sprint_id"], name: "index_issues_on_sprint_id", using: :btree
+  add_index "issues", ["team_id"], name: "index_issues_on_team_id", using: :btree
+
+  create_table "sprints", force: true do |t|
+    t.string   "name",                     null: false
+    t.integer  "team_id"
+    t.float    "percentage", default: 0.0
+    t.datetime "starttime"
+    t.datetime "endtime"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sprints", ["team_id"], name: "index_sprints_on_team_id", using: :btree
 
   create_table "team_relationships", force: true do |t|
     t.integer  "user_id"
@@ -78,7 +94,10 @@ ActiveRecord::Schema.define(version: 20141026155737) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug",       null: false
   end
+
+  add_index "teams", ["slug"], name: "index_teams_on_slug", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
